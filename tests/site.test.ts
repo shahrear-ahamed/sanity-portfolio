@@ -10,6 +10,16 @@ beforeAll(async () => {
 });
 
 describe("production homepage", () => {
+  it("ships the recovery page and deployment security policy", async () => {
+    const notFound = await readFile(resolve(output, "404.html"), "utf8");
+    expect(notFound).toContain("Page not found");
+    expect(notFound).toContain('href="/"');
+    const headers = await readFile(resolve(output, "_headers"), "utf8");
+    expect(headers).toContain("X-Content-Type-Options: nosniff");
+    expect(headers).toContain("X-Frame-Options: DENY");
+    expect(headers).toContain("/_astro/*");
+  });
+
   it("renders one main landmark and one primary heading with shared navigation", () => {
     expect(html.match(/<main\b/g)).toHaveLength(1);
     expect(html.match(/<h1\b/g)).toHaveLength(1);
