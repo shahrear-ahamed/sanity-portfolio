@@ -85,9 +85,9 @@ Content lives in Astro collections defined in `src/content.config.ts`:
 Use a lowercase, hyphenated filename; keep entries directly inside their collection
 folder. Adding a Markdown file automatically adds its detail page and archive entry
 and homepage preview on the next build. Both detail templates use the shared editorial design system.
-The included articles and projects are reference examples you can edit or replace.
+The included blog articles are editable examples. Project case studies describe work documented in the resume.
 The archives and homepage previews read from the same Markdown collections.
-Try `building-a-small-reliable-queue.md` and `fieldnotes.md` as editable dummy examples.
+Use `building-a-small-reliable-queue.md` as a blog example and the project Markdown files as case-study templates.
 
 Blog example (`src/content/blogs/my-first-post.md`):
 
