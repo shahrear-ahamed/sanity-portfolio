@@ -40,7 +40,7 @@ beforeAll(async () => {
   await collectPages(output);
 });
 
-it("shows the Markdown examples on the homepage and their archives", () => {
+it("shows the Markdown examples on the homepage and in their archives", () => {
   for (const [archive, slug, title] of [
     ["blogs", "building-a-small-reliable-queue", "Building a Small, Reliable Queue"],
     ["projects", "fieldnotes", "Fieldnotes"],
