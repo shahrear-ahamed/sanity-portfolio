@@ -73,3 +73,26 @@ and must not be committed. The homepage adapts `design/home.html` into Astro
 with compiled Tailwind styles and a persistent theme toggle. Reference article
 content is retained for design review; newsletter subscriptions
 and article detail pages are not yet connected.
+
+## Reusable components
+
+Pages use `src/layouts/SiteLayout.astro` for the shared header, footer,
+background, and main content container. Pass `title` and an optional
+`description`, and put page content inside the layout slot.
+
+- `src/components/layout/`: shared header, footer, and background.
+- `src/components/home/`: homepage sections and newsletter.
+- `src/components/ui/`: theme toggle, sketch divider, and project card.
+
+Interactive scripts live with their components. `BaseLayout.astro` owns the
+HTML document, metadata, fonts, global stylesheet, and initial theme selection.
+
+## Formatting
+
+Use `vp fmt` to format the project and `vp fmt --check` to check formatting.
+The `fmt` block in `vite.config.ts` enables Astro formatting with
+`@astrojs/compiler-rs`, two-space indentation, and a 100-character preferred
+line width. The local `design/` references are excluded.
+
+Install the recommended Oxc extension in VS Code to use the same formatter
+on save. `.editorconfig` keeps basic whitespace consistent in other editors.
