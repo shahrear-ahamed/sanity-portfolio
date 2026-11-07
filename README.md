@@ -40,7 +40,19 @@ src/styles/global.css   Tailwind import, theme tokens, and base styles
 
 The homepage is a minimal starting point for the portfolio design. Update
 `src/pages/index.astro` to build out the site and `src/styles/global.css`
-to customize the theme. No CMS or deployment service is configured.
+to customize the theme. No CMS is configured.
+
+## Cloudflare deployment
+
+`wrangler.jsonc` configures the `portfolio-shahrear` Worker to serve the static
+site from `dist/` and pins its compatibility date.
+
+Use these commands in Cloudflare Workers Builds:
+
+- Build command: `pnpm run build`
+- Deploy command: `pnpm dlx wrangler deploy`
+
+Use pnpm for deployment because the project requires pnpm in `devEngines`.
 
 TypeScript 6 is used for compatibility with `@astrojs/check`.
 `vp run check` runs `astro check` to check both `.astro` templates and
