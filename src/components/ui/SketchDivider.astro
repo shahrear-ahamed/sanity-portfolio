@@ -1,0 +1,19 @@
+---
+interface Props {
+  path?: string;
+}
+const {
+  path = "M0 3.2 Q 80 1.8, 160 3.4 T 320 2.6 T 480 3.5 T 640 2.5 T 800 3.4 T 960 2.7 T 1120 3.3 T 1200 2.9",
+} = Astro.props;
+---
+
+<div aria-hidden="true" class="w-full my-space-lg hand-wavy-stroke overflow-hidden">
+  <svg
+    class="w-full h-2 stroke-current"
+    fill="none"
+    preserveAspectRatio="none"
+    viewBox="0 0 1200 6"
+  >
+    <path d={path} stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2" />
+  </svg>
+</div>
