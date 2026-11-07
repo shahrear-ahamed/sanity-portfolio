@@ -6,6 +6,13 @@ export default defineConfig({
   },
   test: {
     include: ["tests/**/*.test.ts"],
+    environment: "node",
+    passWithNoTests: false,
+    forbidOnly: Boolean(process.env.CI),
+    clearMocks: true,
+    restoreMocks: true,
+    testTimeout: 10_000,
+    hookTimeout: 10_000,
   },
   fmt: {
     astro: true,

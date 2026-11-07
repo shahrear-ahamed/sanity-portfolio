@@ -10,6 +10,7 @@
     "format": "vp fmt",
     "astro": "astro",
     "test": "astro build && vp test",
+    "validate": "vp check && astro check && astro build && vp test",
     "prepare": "vp config --no-agent"
   },
   "dependencies": {
