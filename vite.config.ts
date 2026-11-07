@@ -1,6 +1,12 @@
 import { defineConfig } from "vite-plus";
 
 export default defineConfig({
+  staged: {
+    "*": "vp check --fix",
+  },
+  test: {
+    include: ["tests/**/*.test.ts"],
+  },
   fmt: {
     astro: true,
     printWidth: 100,
