@@ -1,0 +1,32 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="Shahrear — Portfolio">
+  <div class="mx-auto flex min-h-svh max-w-6xl flex-col px-6 sm:px-12">
+    <header class="flex items-center justify-between border-b border-ink/15 py-7">
+      <a href="/" class="text-lg font-semibold tracking-tight">Shahrear<span class="text-accent">.</span></a>
+      <span class="font-mono text-xs tracking-wide text-ink/60">A NEW CHAPTER / 01</span>
+    </header>
+
+    <main id="main-content" class="flex flex-1 flex-col justify-center py-24 sm:py-32">
+      <p class="mb-8 flex items-center gap-3 text-sm text-accent">
+        <span class="size-2 rounded-full bg-accent" aria-hidden="true"></span>
+        Portfolio in progress
+      </p>
+      <h1 class="max-w-4xl text-6xl leading-[1.05] font-medium tracking-[-0.06em] sm:text-8xl lg:text-9xl">
+        A fresh start.<br />
+        <span class="text-accent">A space to create.</span>
+      </h1>
+      <p class="mt-9 max-w-lg text-lg leading-relaxed text-ink/65">
+        I’m Shahrear. This is the beginning of my new portfolio — a home for
+        selected work, ideas, and what comes next.
+      </p>
+    </main>
+
+    <footer class="flex flex-col gap-3 border-t border-ink/15 py-6 text-xs text-ink/55 sm:flex-row sm:items-center sm:justify-between">
+      <p>© {new Date().getFullYear()} Shahrear</p>
+      <p>Made with intention.</p>
+    </footer>
+  </div>
+</BaseLayout>

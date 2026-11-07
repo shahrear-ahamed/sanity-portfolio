@@ -1,0 +1,22 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Segoe UI", sans-serif;
+  --color-paper: #f5f4ef;
+  --color-ink: #242922;
+  --color-accent: #466b48;
+}
+
+@layer base {
+  body {
+    @apply m-0 bg-paper font-sans text-ink antialiased;
+  }
+
+  ::selection {
+    @apply bg-accent text-white;
+  }
+
+  a:focus-visible {
+    @apply rounded-sm outline-2 outline-offset-4 outline-accent;
+  }
+}
