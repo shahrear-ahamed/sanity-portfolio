@@ -25,3 +25,6 @@ pnpm-debug.log*
 
 # local design references (never commit)
 /design/
+
+# generated Vite+ hook dispatcher
+.vite-hooks/_/

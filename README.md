@@ -96,3 +96,18 @@ line width. The local `design/` references are excluded.
 
 Install the recommended Oxc extension in VS Code to use the same formatter
 on save. `.editorconfig` keeps basic whitespace consistent in other editors.
+
+## Commit hooks
+
+Vite+ runs `vp staged` before each commit to format and check staged files,
+then `vp run check` checks Astro templates and TypeScript. Failed checks stop
+the commit. Staged checks can automatically fix and restage supported files.
+The hook also runs `vp run test`, which builds the site and tests the generated
+page structure, internal anchor destinations, and local asset availability.
+
+The `prepare` script installs hooks after dependency installation. For an
+existing checkout, run `vp hooks enable`; inspect setup with `vp hooks status`.
+
+Run `vp run test` for the complete build-and-test workflow. `vp test` runs only
+the tests against an existing `dist/` build. These checks do not replace browser
+testing for visual appearance or client interactions.

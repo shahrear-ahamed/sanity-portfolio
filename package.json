@@ -9,7 +9,8 @@
     "check": "astro check",
     "format": "vp fmt",
     "astro": "astro",
-    "test": "astro build && vp test"
+    "test": "astro build && vp test",
+    "prepare": "vp config --no-agent"
   },
   "dependencies": {
     "@tailwindcss/vite": "4.3.5",
