@@ -71,5 +71,5 @@ when loading the checker. Revisit this pin when upgrading Astro’s checker.
 `DESIGN.md` is versioned design guidance. The local `design/` folder is ignored
 and must not be committed. The homepage adapts `design/home.html` into Astro
 with compiled Tailwind styles and a persistent theme toggle. Reference article
-content and the portrait are retained for design review; newsletter subscriptions
+content is retained for design review; newsletter subscriptions
 and article detail pages are not yet connected.
