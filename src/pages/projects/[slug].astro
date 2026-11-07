@@ -1,6 +1,6 @@
 ---
 import { getCollection, render, type CollectionEntry } from "astro:content";
-import Newsletter from "../../components/home/Newsletter.astro";
+// import Newsletter from "../../components/ui/Newsletter.astro";
 import SketchDivider from "../../components/ui/SketchDivider.astro";
 import SiteLayout from "../../layouts/SiteLayout.astro";
 
@@ -73,12 +73,7 @@ const { Content } = await render(project);
     <Content />
   </article>
 
-  <aside aria-label="Engineering newsletter" class="content-panel text-center">
-    <h2 class="font-headline-md text-headline-md mb-3">
-      Engineering notes delivered without noise
-    </h2>
-    <Newsletter />
-  </aside>
+  {/* <Newsletter /> */}
 
   <nav aria-label="Project navigation" class="project-navigation">
     <a class="back-link" href="/projects/">

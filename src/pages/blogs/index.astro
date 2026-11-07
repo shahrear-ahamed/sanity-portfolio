@@ -2,6 +2,7 @@
 import { getCollection } from "astro:content";
 import FilterBar from "../../components/content/FilterBar.astro";
 import SketchDivider from "../../components/ui/SketchDivider.astro";
+// import Newsletter from "../../components/ui/Newsletter.astro";
 import SiteLayout from "../../layouts/SiteLayout.astro";
 
 const entries = await getCollection("blogs");
@@ -109,6 +110,7 @@ const categories = [...new Set(posts.map((post) => post.category))];
       ))}
     </section>
   </div>
+  {/* <Newsletter /> */}
 </SiteLayout>
 
 <style>

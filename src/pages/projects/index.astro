@@ -1,8 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import FilterBar from "../../components/content/FilterBar.astro";
-import Newsletter from "../../components/home/Newsletter.astro";
-import SketchDivider from "../../components/ui/SketchDivider.astro";
+// import Newsletter from "../../components/ui/Newsletter.astro";
 import SiteLayout from "../../layouts/SiteLayout.astro";
 
 const entries = (await getCollection("projects")).sort((a, b) => a.id.localeCompare(b.id));
@@ -171,17 +170,7 @@ const categories = [
     </section>
   </div>
 
-  <SketchDivider />
-
-  <aside aria-label="Engineering newsletter" class="text-center space-y-4">
-    <span class="font-label-mono text-label-mono text-secondary uppercase tracking-widest">
-      The dispatch
-    </span>
-    <h2 class="font-headline-md text-headline-md text-on-surface">
-      Notes from the engineering desk.
-    </h2>
-    <Newsletter />
-  </aside>
+  {/* <Newsletter /> */}
 </SiteLayout>
 
 <style>
