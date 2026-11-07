@@ -1,0 +1,180 @@
+---
+import { getCollection } from "astro:content";
+import FilterBar from "../../components/content/FilterBar.astro";
+// import Newsletter from "../../components/ui/Newsletter.astro";
+import SiteLayout from "../../layouts/SiteLayout.astro";
+
+const entries = (await getCollection("projects")).sort((a, b) => a.id.localeCompare(b.id));
+const featured = entries[0];
+const catalog = entries.slice(1).map((entry) => ({
+  slug: entry.id,
+  title: entry.data.title,
+  category: entry.data.category,
+  stack: entry.data.stack.join(" / "),
+  excerpt: entry.data.description,
+  tags: entry.data.stack,
+  href: `/projects/${entry.id}/`,
+}));
+const categories = [
+  ...new Set([
+    ...(featured ? [featured.data.category] : []),
+    ...catalog.map((project) => project.category),
+  ]),
+];
+---
+
+<SiteLayout
+  title="Engineering Projects & Systems — Shahrear Ahamed"
+  description="Production platforms, distributed systems, open-source libraries, and developer tools. Explore the engineering decisions behind the work."
+>
+  <header class="space-y-4">
+    <span class="font-label-mono text-label-mono uppercase tracking-widest text-secondary">
+      Selected work · Systems & craft
+    </span>
+    <h1 class="font-display-hero text-display-hero text-on-surface">
+      Engineering projects <em>& systems.</em>
+    </h1>
+    <p class="font-body-lg text-body-lg text-on-surface-variant max-w-145">
+      Backend automation, real-time communication, and full-stack product work at Navigatus and
+      Mexemy. A closer look at the problems, decisions, and contributions behind the work.
+    </p>
+  </header>
+
+  <div data-filter-catalog class="space-y-space-xl">
+    <FilterBar categories={categories} placeholder="Search projects, languages, or tools…" />
+
+    {featured && (
+      <article
+        id={featured.id}
+        data-filter-item
+        data-category={featured.data.category}
+        data-search={`${featured.data.title} ${featured.data.description} ${featured.data.category} ${featured.data.stack.join(" ")}`}
+        class="featured-project wobbly-card bg-surface-container-lowest/70 p-space-lg sm:p-space-xl space-y-space-lg"
+      >
+        <span class="font-label-mono text-label-mono uppercase tracking-wider text-secondary">
+          Featured project
+        </span>
+        <div class="space-y-3">
+          <span class="font-label-mono text-label-mono text-secondary uppercase tracking-wider">
+            {featured.data.category}
+          </span>
+          <h2 class="font-headline-lg text-[2.5rem] leading-tight text-on-surface">
+            <a
+              href={`/projects/${featured.id}/`}
+              class="hover:underline underline-offset-4 decoration-1"
+            >
+              {featured.data.title}
+            </a>
+          </h2>
+          <p class="font-body-md text-body-md text-on-surface-variant">
+            {featured.data.description}
+          </p>
+        </div>
+        {(featured.data.timeline || featured.data.role) && (
+          <dl class="grid gap-4 sm:grid-cols-2 border-y border-outline-variant/40 py-4">
+            {featured.data.timeline && (
+              <div>
+                <dt class="font-label-mono text-label-mono text-secondary">Timeline & scope</dt>
+                <dd class="mt-2 text-body-md">{featured.data.timeline}</dd>
+              </div>
+            )}
+            {featured.data.role && (
+              <div>
+                <dt class="font-label-mono text-label-mono text-secondary">My role</dt>
+                <dd class="mt-2 text-body-md">{featured.data.role}</dd>
+              </div>
+            )}
+          </dl>
+        )}
+        {featured.data.metrics.length > 0 && (
+          <dl class="grid grid-cols-2 gap-4">
+            {featured.data.metrics.map((metric) => (
+              <div>
+                <dt class="font-label-mono text-label-mono text-secondary">{metric.label}</dt>
+                <dd class="font-headline-md text-headline-md mt-1">{metric.value}</dd>
+                <dd class="font-body-sm text-body-sm text-secondary">{metric.detail}</dd>
+              </div>
+            ))}
+          </dl>
+        )}
+        <div class="flex flex-wrap items-center justify-between gap-5">
+          <ul class="flex flex-wrap gap-2" aria-label={`${featured.data.title} technology stack`}>
+            {featured.data.stack.map((technology) => (
+              <li class="font-label-mono text-[10px] bg-surface-container text-secondary px-2 py-1 rounded">
+                {technology}
+              </li>
+            ))}
+          </ul>
+          <a
+            href={`/projects/${featured.id}/`}
+            class="font-nav-link text-nav-link text-on-surface underline underline-offset-4 decoration-outline-variant hover:decoration-current transition-colors inline-flex items-center gap-2"
+          >
+            Read the case study <span aria-hidden="true">→</span>
+          </a>
+        </div>
+      </article>
+    )}
+
+    <section aria-labelledby="project-catalog-heading" class="space-y-space-lg">
+      <div class="flex flex-wrap items-baseline justify-between gap-2 border-b border-outline-variant/40 pb-3">
+        <h2 id="project-catalog-heading" class="font-headline-md text-headline-md text-on-surface">
+          Projects & systems
+        </h2>
+        <span class="font-label-mono text-[10px] uppercase tracking-wider text-secondary">
+          The project index
+        </span>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-space-md">
+        {catalog.map((project) => (
+          <article
+            id={project.slug}
+            data-filter-item
+            data-category={project.category}
+            data-search={`${project.title} ${project.category} ${project.stack} ${project.excerpt} ${project.tags.join(" ")}`}
+            class="wobbly-card bg-surface-container-lowest/70 p-5 flex flex-col gap-5"
+          >
+            <div class="space-y-3">
+              <div class="flex flex-wrap justify-between items-start gap-2">
+                <span class="font-label-mono text-[9px] uppercase tracking-wider text-secondary">
+                  {project.category}
+                </span>
+                <span class="font-label-mono text-[9px] bg-surface-container px-1.5 py-0.5 rounded text-secondary">
+                  {project.stack}
+                </span>
+              </div>
+              <h3 class="font-headline-sm text-headline-sm text-on-surface">
+                {project.href ? (
+                  <a href={project.href} class="hover:underline underline-offset-4">
+                    {project.title}
+                  </a>
+                ) : (
+                  project.title
+                )}
+              </h3>
+              <p class="font-body-sm text-body-sm text-on-surface-variant">{project.excerpt}</p>
+            </div>
+            <ul
+              class="mt-auto flex flex-wrap gap-1.5 border-t border-outline-variant/30 pt-3"
+              aria-label={`${project.title} details`}
+            >
+              {project.tags.map((tag) => (
+                <li class="font-label-mono text-[9px] text-secondary bg-surface-container-low px-1.5 py-1 rounded">
+                  {tag}
+                </li>
+              ))}
+            </ul>
+          </article>
+        ))}
+      </div>
+    </section>
+  </div>
+
+  {/* <Newsletter /> */}
+</SiteLayout>
+
+<style>
+  .featured-project:hover {
+    border-color: var(--color-outline) !important;
+  }
+</style>

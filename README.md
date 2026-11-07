@@ -75,6 +75,74 @@ The homepage follows the editorial design system documented in `DESIGN.md`. Upda
 `src/pages/index.astro` to build out the site and `src/styles/global.css`
 to customize the theme. No CMS is configured.
 
+## Writing blogs and projects
+
+Content lives in Astro collections defined in `src/content.config.ts`:
+
+- `src/content/blogs/*.md` → `/blogs/[filename]/`
+- `src/content/projects/*.md` → `/projects/[filename]/`
+
+Use a lowercase, hyphenated filename; keep entries directly inside their collection
+folder. Adding a Markdown file automatically adds its detail page and archive entry
+and homepage preview on the next build. Both detail templates use the shared editorial design system.
+The included blog articles are editable examples. Project case studies describe work documented in the resume.
+The archives and homepage previews read from the same Markdown collections.
+Use `building-a-small-reliable-queue.md` as a blog example and the project Markdown files as case-study templates.
+
+Blog example (`src/content/blogs/my-first-post.md`):
+
+```md
+---
+title: My first post
+description: A short introduction to this article.
+date: 2026-11-07
+category: Software Engineering
+---
+
+Your introduction goes here.
+
+## A section heading
+
+Write using Markdown: paragraphs, lists, links, images, and fenced code blocks.
+```
+
+Optional blog fields: `updated`, `author`, `subtitle`, and `words` (for example,
+`"~900 words"`). Reading metadata is calculated from the body when `words` is omitted.
+
+Project example (`src/content/projects/my-project.md`):
+
+```md
+---
+title: My project
+description: The problem this project solves.
+category: Distributed Systems
+timeline: November 2026
+role: Lead engineer
+stack:
+  - Go
+  - PostgreSQL
+metrics:
+  - label: Latency
+    value: 12ms
+    detail: P95 response time
+---
+
+## The challenge
+
+Describe the problem and your approach.
+
+## Architecture
+
+Explain the design decisions.
+
+## Outcomes
+
+Share the results and lessons.
+```
+
+Only project `title` and `description` are required. Other project metadata is optional;
+sections without metadata are omitted. Markdown code fences receive syntax highlighting.
+
 ## Cloudflare deployment
 
 `wrangler.jsonc` configures the `portfolio-shahrear` Worker to serve the static
@@ -104,8 +172,8 @@ when loading the checker. Revisit this pin when upgrading Astro’s checker.
 `DESIGN.md` is versioned design guidance. The local `design/` folder is ignored
 and must not be committed. The homepage adapts `design/home.html` into Astro
 with compiled Tailwind styles and a persistent theme toggle. Reference article
-content is retained for design review; newsletter subscriptions
-and article detail pages are not yet connected.
+content is retained as editable Markdown examples for design review. Newsletter
+subscriptions are not yet connected.
 
 ## Reusable components
 

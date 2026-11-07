@@ -1,0 +1,226 @@
+---
+import { getCollection, render, type CollectionEntry } from "astro:content";
+// import Newsletter from "../../components/ui/Newsletter.astro";
+import SketchDivider from "../../components/ui/SketchDivider.astro";
+import SiteLayout from "../../layouts/SiteLayout.astro";
+
+export async function getStaticPaths() {
+  const projects = await getCollection("projects");
+  return projects.map((project) => ({
+    params: { slug: project.id },
+    props: { project },
+  }));
+}
+
+interface Props {
+  project: CollectionEntry<"projects">;
+}
+const { project } = Astro.props;
+const { title, description, category, timeline, role, stack, metrics } = project.data;
+const { Content } = await render(project);
+---
+
+<SiteLayout title={`${title} — Project · Shahrear Ahamed`} description={description}>
+  <header class="page-intro">
+    <a class="back-link" href="/projects/">
+      ← All projects
+    </a>
+    <p class="eyebrow">{category} · Case study</p>
+    <h1>{title}</h1>
+    <p class="page-lead">{description}</p>
+    {(timeline || role || stack.length > 0) && (
+      <dl class="project-meta content-panel">
+        {timeline && (
+          <div>
+            <dt>Timeline &amp; scope</dt>
+            <dd>{timeline}</dd>
+          </div>
+        )}
+        {role && (
+          <div>
+            <dt>My role</dt>
+            <dd>{role}</dd>
+          </div>
+        )}
+        {stack.length > 0 && (
+          <div>
+            <dt>Core stack</dt>
+            <dd class="stack-list">
+              {stack.map((item) => (
+                <span class="tag">{item}</span>
+              ))}
+            </dd>
+          </div>
+        )}
+      </dl>
+    )}
+  </header>
+
+  {metrics.length > 0 && (
+    <section aria-label="Project results" class="metric-grid">
+      {metrics.map(({ label, value, detail }) => (
+        <div class="metric content-panel">
+          <span class="eyebrow">{label}</span>
+          <span class="metric-value">{value}</span>
+          <p>{detail}</p>
+        </div>
+      ))}
+    </section>
+  )}
+
+  <SketchDivider />
+  <article class="content-panel editorial-prose case-study">
+    <Content />
+  </article>
+
+  {/* <Newsletter /> */}
+
+  <nav aria-label="Project navigation" class="project-navigation">
+    <a class="back-link" href="/projects/">
+      ← Explore all projects
+    </a>
+    <a class="back-link" href="#main-content">
+      Back to top ↑
+    </a>
+  </nav>
+</SiteLayout>
+
+<style>
+  .project-meta {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.25rem;
+    margin-top: 2rem;
+  }
+  .project-meta dt {
+    margin-bottom: 0.5rem;
+    color: var(--color-secondary);
+    font-family: var(--font-label-mono);
+    font-size: 0.625rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .project-meta dd {
+    margin: 0;
+    font-size: 0.875rem;
+  }
+  .stack-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.375rem;
+  }
+  .metric-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0.75rem;
+  }
+  .metric {
+    padding: 1rem;
+  }
+  .metric .eyebrow {
+    font-size: 0.625rem;
+  }
+  .metric-value {
+    display: block;
+    margin: 0.5rem 0 0.25rem;
+    font-family: var(--font-headline);
+    font-size: 1.875rem;
+    line-height: 1.1;
+  }
+  .metric p {
+    font-size: 0.75rem;
+    color: var(--color-secondary);
+  }
+  .case-study :global(h2:not(:first-child)) {
+    margin-top: 3rem;
+  }
+  .case-study :global(.architecture-figure) {
+    margin: 1.25rem 0 0;
+  }
+  .case-study :global(.pipeline) {
+    padding: 1.25rem;
+  }
+  .case-study :global(.pipeline-stages) {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+  .case-study :global(.pipeline-stages li),
+  .case-study :global(.pipeline-destinations > div) {
+    display: flex;
+    flex-direction: column;
+    gap: 0.375rem;
+    min-width: 0;
+    padding: 1rem 0.75rem;
+    border: 1px solid var(--color-outline-variant);
+    border-radius: 0.5rem;
+    background: color-mix(in oklab, var(--color-surface-container-lowest) 70%, transparent);
+    font-family: var(--font-label-mono);
+    font-size: 0.625rem;
+    color: var(--color-secondary);
+    text-align: center;
+    overflow-wrap: anywhere;
+  }
+  .case-study :global(.pipeline-stages li + li) {
+    margin-top: 0;
+  }
+  .case-study :global(.pipeline strong) {
+    color: var(--color-on-surface);
+    font-size: 0.6875rem;
+  }
+  .case-study :global(.pipeline .stage-label) {
+    font-size: 0.5625rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+  .case-study :global(.pipeline-destinations) {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+    border-top: 1px dashed var(--color-outline-variant);
+    padding-top: 1rem;
+    margin-top: 1rem;
+  }
+  .case-study :global(.architecture-figure figcaption),
+  .case-study :global(.code-caption) {
+    margin-top: 0.75rem;
+    font-size: 0.8125rem;
+    font-style: italic;
+    color: var(--color-secondary);
+  }
+  .case-study :global(.code-filename) {
+    overflow-wrap: anywhere;
+  }
+  .project-navigation {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--color-outline-variant);
+  }
+  @media (max-width: 639px) {
+    .project-meta {
+      grid-template-columns: 1fr;
+    }
+    .metric-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .case-study :global(.pipeline-stages) {
+      grid-template-columns: 1fr;
+    }
+    .case-study :global(.pipeline-destinations) {
+      grid-template-columns: 1fr;
+    }
+    .case-study :global(.pipeline-stages li) {
+      padding: 1rem;
+    }
+    .case-study :global(.pipeline-stages li + li::before) {
+      content: "↓";
+      color: var(--color-outline);
+    }
+  }
+</style>

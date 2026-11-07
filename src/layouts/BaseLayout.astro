@@ -29,10 +29,6 @@ const {
       href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap"
       rel="stylesheet"
     />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
-      rel="stylesheet"
-    />
     <script is:inline>
       try {
         const theme = localStorage.getItem("theme");
@@ -44,7 +40,7 @@ const {
     </script>
     <title>{title}</title>
   </head>
-  <body class="bg-background text-on-surface antialiased selection:bg-surface-variant selection:text-primary transition-colors duration-200">
+  <body class="bg-background text-on-surface antialiased selection:bg-surface-variant selection:text-primary dark:selection:bg-primary dark:selection:text-background transition-colors duration-200">
     <a
       href="#main-content"
       class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:bg-background focus:p-3"

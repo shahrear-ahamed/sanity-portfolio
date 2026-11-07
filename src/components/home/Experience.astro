@@ -1,31 +1,45 @@
-<section class="space-y-space-sm pt-space-xs" id="experience">
-  <h2 class="font-headline-md text-headline-md text-on-surface">Work experience</h2>
-  <div class="space-y-space-sm">
-    <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
-      Ten years across product companies — from distributed PHP &amp; Go applications at East West
-      Media and IPvision, through Pathao’s core ride-sharing services, to senior engineering at
-      MyZenTeam, Kaz360, and Kahf Yazılım, designing systems that carry real scale.
-    </p>
-    <p class="font-body-md text-body-md text-on-surface">
-      I'm currently{" "}
-      <strong class="font-medium text-primary">open to new opportunities and consultations</strong>{" "}
-      —
-      <a
-        class="inline-flex items-center gap-1 font-medium underline underline-offset-4 decoration-outline-variant hover:decoration-primary transition-colors"
-        href="mailto:contact@shahrear.dev"
-      >
-        get in touch <span class="material-symbols-outlined text-[15px]">mail</span>
-      </a>
-      .
-    </p>
-    <div>
-      <a
-        class="font-label-mono text-label-mono uppercase tracking-widest text-secondary hover:text-primary flex items-center gap-1 pt-1 group"
-        href="#experience"
-      >
-        <span class="">FULL STORY</span>
-        <span class="group-hover:translate-x-0.5 transition-transform">→</span>
-      </a>
-    </div>
+---
+import { skills } from "../../data/profile";
+---
+
+<section class="space-y-space-lg pt-space-xs" id="experience" aria-labelledby="experience-heading">
+  <div class="space-y-3">
+    <h2 id="experience-heading" class="font-headline-md text-headline-md text-on-surface">
+      Work experience
+    </h2>
   </div>
+
+  <div class="space-y-space-md">
+    <article class="content-panel space-y-3">
+      <h3 class="font-headline-sm text-headline-sm">Software Engineer</h3>
+      <div class="metadata-row justify-between">
+        <span>Navigatus · Remote · Melbourne, Australia</span>
+        <span>Mar 2025 – Present</span>
+      </div>
+    </article>
+
+    <article class="content-panel space-y-3">
+      <h3 class="font-headline-sm text-headline-sm">Founding Full-Stack Engineer</h3>
+      <div class="metadata-row justify-between">
+        <span>Mexemy · Cumilla, Bangladesh</span>
+        <span>Nov 2022 – Dec 2024</span>
+      </div>
+    </article>
+  </div>
+
+  <section class="space-y-space-md" aria-labelledby="skills-heading">
+    <h3 id="skills-heading" class="font-headline-sm text-headline-sm">
+      Technical skills
+    </h3>
+    <dl class="grid gap-space-md sm:grid-cols-2">
+      {skills.map(({ label, items }) => (
+        <div class="space-y-2">
+          <dt class="font-label-mono text-label-mono uppercase tracking-wider text-secondary">
+            {label}
+          </dt>
+          <dd class="font-body-sm text-body-sm text-on-surface-variant">{items.join(" · ")}</dd>
+        </div>
+      ))}
+    </dl>
+  </section>
 </section>

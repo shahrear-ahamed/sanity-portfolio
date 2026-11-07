@@ -1,17 +1,21 @@
+---
+import { Moon02Icon, Sun03Icon } from "@hugeicons/core-free-icons";
+import Icon from "./Icon.astro";
+---
+
 <button
   aria-label="Toggle theme"
-  class="w-8 h-8 rounded-full flex items-center justify-center text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors duration-150 active:scale-[0.98]"
+  class="cursor-pointer w-8 h-8 shrink-0 rounded-full flex items-center justify-center text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors duration-150 active:scale-[0.98]"
   id="theme-toggle"
 >
-  <span class="material-symbols-outlined text-[18px]">dark_mode</span>
+  <Icon icon={Moon02Icon} data-theme-moon />
+  <Icon icon={Sun03Icon} data-theme-sun />
 </button>
 <script>
   const themeButton = document.querySelector<HTMLButtonElement>("#theme-toggle");
   const updateThemeButton = () => {
     const dark = document.documentElement.classList.contains("dark");
     themeButton?.setAttribute("aria-pressed", String(dark));
-    const icon = themeButton?.querySelector("span");
-    if (icon) icon.textContent = dark ? "light_mode" : "dark_mode";
   };
   updateThemeButton();
   themeButton?.addEventListener("click", () => {
@@ -22,3 +26,15 @@
     updateThemeButton();
   });
 </script>
+
+<style>
+  :global([data-theme-sun]) {
+    display: none;
+  }
+  :global(.dark) :global([data-theme-moon]) {
+    display: none;
+  }
+  :global(.dark) :global([data-theme-sun]) {
+    display: block;
+  }
+</style>

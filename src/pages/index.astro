@@ -1,6 +1,7 @@
 ---
 import Experience from "../components/home/Experience.astro";
 import Hero from "../components/home/Hero.astro";
+// import Newsletter from "../components/ui/Newsletter.astro";
 import OpenSource from "../components/home/OpenSource.astro";
 import Writing from "../components/home/Writing.astro";
 import SketchDivider from "../components/ui/SketchDivider.astro";
@@ -9,7 +10,7 @@ import SiteLayout from "../layouts/SiteLayout.astro";
 
 <SiteLayout
   title="Shahrear Ahamed — Software Engineer"
-  description="Software engineering, systems that scale, open source, and thoughtful notes on the craft of building software."
+  description="Software Engineer focused on TypeScript backend and full-stack systems, asynchronous workflows, real-time communication, and AI document processing."
 >
   <Hero />
 
@@ -21,6 +22,7 @@ import SiteLayout from "../layouts/SiteLayout.astro";
   <Writing />
 
   <SketchDivider path="M0 3.0 Q 75 1.8, 150 3.3 T 300 2.6 T 450 3.4 T 600 2.7 T 750 3.3 T 900 2.6 T 1050 3.2 T 1200 2.8" />
-
   <OpenSource />
+
+  {/* <Newsletter /> */}
 </SiteLayout>
