@@ -38,7 +38,7 @@ src/pages/              Astro file-based routes
 src/styles/global.css   Tailwind import, theme tokens, and base styles
 ```
 
-The homepage is a minimal starting point for the portfolio design. Update
+The homepage follows the editorial design system documented in `DESIGN.md`. Update
 `src/pages/index.astro` to build out the site and `src/styles/global.css`
 to customize the theme. No CMS is configured.
 
@@ -65,3 +65,11 @@ TypeScript files.
 `@emnapi/runtime` is pinned to 1.11.3 to match the runtime used by
 Astro’s `astro2tsx` converter. The automatically resolved 2.0 beta crashes
 when loading the checker. Revisit this pin when upgrading Astro’s checker.
+
+## Design references
+
+`DESIGN.md` is versioned design guidance. The local `design/` folder is ignored
+and must not be committed. The homepage adapts `design/home.html` into Astro
+with compiled Tailwind styles and a persistent theme toggle. Reference article
+content and the portrait are retained for design review; newsletter subscriptions
+and article detail pages are not yet connected.
