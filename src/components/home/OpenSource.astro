@@ -1,10 +1,9 @@
 ---
 import { getCollection } from "astro:content";
 import ProjectCard from "../ui/ProjectCard.astro";
-const projectEntries = await getCollection("projects");
-const pulseDeck = projectEntries.find((entry) =>
-  entry.data.title.toLowerCase().startsWith("pulsedeck"),
-);
+const projects = (await getCollection("projects"))
+  .sort((a, b) => a.id.localeCompare(b.id))
+  .slice(0, 6);
 ---
 
 <section class="space-y-space-md" id="works">
@@ -18,68 +17,16 @@ const pulseDeck = projectEntries.find((entry) =>
     </a>
   </div>
   <div class="grid grid-cols-1 sm:grid-cols-2 gap-space-sm pt-2">
-    <ProjectCard
-      href="/projects/#glwtpl-public-license"
-      title={"GLWTPL"}
-      language={"TEXT"}
-      icon={"balance"}
-      detail={"Permissive"}
-    >
-      The "Good Luck With That" Public License — a humorous yet poignant software license for code
-      you're releasing with zero guarantees.
-    </ProjectCard>
-
-    <ProjectCard
-      href="/projects/#bangla-programming-resources"
-      title={"Bangla Programming Resources"}
-      language={"MARKDOWN"}
-      icon={"stars"}
-      detail={"1.2k stars"}
-    >
-      Curated list of Bengali tutorials, high-value algorithmic references, and systems engineering
-      material across various topics.
-    </ProjectCard>
-
-    <ProjectCard
-      href="/projects/#devtools-desktop"
-      title={"DevTools"}
-      language={"TYPESCRIPT"}
-      icon={"desktop_windows"}
-      detail={"Electron / Tauri"}
-    >
-      Ultimate developer toolkit desktop utility — fast formatters, regex analyzers, encoders, and
-      converters running entirely offline.
-    </ProjectCard>
-
-    <ProjectCard
-      href={pulseDeck ? `/projects/${pulseDeck.id}/` : "/projects/"}
-      title={"PulseDeck"}
-      language={"GO"}
-      icon={"smart_toy"}
-      detail={"LLM Tooling"}
-    >
-      The real-time inbox for your autonomous AI agents — an aggregated cockpit to review agent
-      milestones and flag items needing human review.
-    </ProjectCard>
-
-    <ProjectCard
-      title={"Laravel Framework"}
-      language={"PHP"}
-      icon={"lowercase"}
-      detail={"Contributor"}
-    >
-      The PHP framework for web artisans — upstream core contributions focused on queue processing
-      and database drivers.
-    </ProjectCard>
-
-    <ProjectCard
-      title={"Symfony VarDumper"}
-      language={"PHP"}
-      icon={"bug_report"}
-      detail={"Core Fixes"}
-    >
-      Symfony’s foundational variable inspection tool — patch contributed directly to the Symfony
-      monorepo.
-    </ProjectCard>
+    {projects.map((project) => (
+      <ProjectCard
+        href={`/projects/${project.id}/`}
+        title={project.data.title}
+        language={project.data.stack[0] ?? "PROJECT"}
+        icon="code"
+        detail={project.data.category}
+      >
+        {project.data.description}
+      </ProjectCard>
+    ))}
   </div>
 </section>

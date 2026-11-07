@@ -14,6 +14,12 @@ const routes = [
   },
   { path: "/projects/", active: "/projects/", heading: "Engineering" },
   { path: "/projects/pulsedeck/", active: "/projects/", heading: "PulseDeck" },
+  {
+    path: "/blogs/building-a-small-reliable-queue/",
+    active: "/blogs/",
+    heading: "Building a Small, Reliable Queue",
+  },
+  { path: "/projects/fieldnotes/", active: "/projects/", heading: "Fieldnotes" },
 ];
 
 async function collectPages(directory: string): Promise<void> {
@@ -32,6 +38,20 @@ async function collectPages(directory: string): Promise<void> {
 
 beforeAll(async () => {
   await collectPages(output);
+});
+
+it("shows the Markdown examples on the homepage and their archives", () => {
+  for (const [archive, slug, title] of [
+    ["blogs", "building-a-small-reliable-queue", "Building a Small, Reliable Queue"],
+    ["projects", "fieldnotes", "Fieldnotes"],
+  ]) {
+    for (const route of ["/", `/${archive}/`]) {
+      const html = pages.get(route)!;
+      expect(html).toContain(title);
+      expect(html).toContain(`href="/${archive}/${slug}/"`);
+    }
+    expect(pages.get(`/${archive}/${slug}/`)).toContain("<h2");
+  }
 });
 
 for (const route of routes) {

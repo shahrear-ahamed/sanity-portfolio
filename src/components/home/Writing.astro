@@ -1,4 +1,19 @@
-<section class="grid grid-cols-1 md:grid-cols-2 gap-space-xl relative" id="blogs">
+---
+import { getCollection } from "astro:content";
+
+const posts = (await getCollection("blogs"))
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+  .slice(0, 5);
+const dateLabel = (date: Date) =>
+  date.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+    timeZone: "UTC",
+  });
+---
+
+<section class="space-y-space-md" id="blogs">
   <div class="space-y-space-md">
     <div class="flex items-baseline justify-between border-b border-outline-variant/30 pb-2">
       <h3 class="font-headline-sm text-headline-sm text-on-surface">Latest posts</h3>
@@ -10,235 +25,43 @@
       </a>
     </div>
     <ul class="space-y-4">
-      <li class="group pb-3 relative">
-        <span class="font-label-mono text-label-mono text-secondary uppercase block mb-0.5">
-          JUL 18, 2024
-        </span>
-        <a
-          class="font-headline-sm text-[1.125rem] text-on-surface group-hover:underline decoration-outline-variant decoration-1 underline-offset-4 transition-all block"
-          href="/blogs/#who-sold-my-seat-twice"
-        >
-          Who Sold My Seat Twice?
-        </a>
-        <div class="w-full hand-wavy-stroke pt-2.5 overflow-hidden">
-          <svg
-            class="w-full h-2 stroke-current"
-            fill="none"
-            preserveAspectRatio="none"
-            viewBox="0 0 600 6"
-            xmlns="http://www.w3.org/2000/svg"
+      {posts.map((post, index) => (
+        <li class="group pb-3 relative">
+          <time
+            datetime={post.data.date.toISOString().slice(0, 10)}
+            class="font-label-mono text-label-mono text-secondary uppercase block mb-0.5"
           >
-            <path
-              d="M0 3.2 Q 40 1.0, 80 3.5 T 160 2.6 T 240 3.9 T 320 2.4 T 400 3.7 T 480 2.5 T 560 3.8 T 600 3.0"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="1.3"
-            ></path>
-          </svg>
-        </div>
-      </li>
-      <li class="group pb-3 relative">
-        <span class="font-label-mono text-label-mono text-secondary uppercase block mb-0.5">
-          FEB 14, 2024
-        </span>
-        <a
-          class="font-headline-sm text-[1.125rem] text-on-surface group-hover:underline decoration-outline-variant decoration-1 underline-offset-4 transition-all block"
-          href="/blogs/#a-tale-of-proxy-server"
-        >
-          A tale of proxy server
-        </a>
-        <div class="w-full hand-wavy-stroke pt-2.5 overflow-hidden">
-          <svg
-            class="w-full h-2 stroke-current"
-            fill="none"
-            preserveAspectRatio="none"
-            viewBox="0 0 600 6"
-            xmlns="http://www.w3.org/2000/svg"
+            {dateLabel(post.data.date)}
+          </time>
+          <a
+            class="font-headline-sm text-[1.125rem] text-on-surface group-hover:underline decoration-outline-variant decoration-1 underline-offset-4 transition-all block"
+            href={`/blogs/${post.id}/`}
           >
-            <path
-              d="M0 2.8 Q 45 4.5, 90 2.6 T 180 3.8 T 270 2.3 T 360 3.9 T 450 2.5 T 540 3.7 T 600 3.1"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="1.3"
-            ></path>
-          </svg>
-        </div>
-      </li>
-      <li class="group pb-3 relative">
-        <span class="font-label-mono text-label-mono text-secondary uppercase block mb-0.5">
-          FEB 7, 2024
-        </span>
-        <a
-          class="font-headline-sm text-[1.125rem] text-on-surface group-hover:underline decoration-outline-variant decoration-1 underline-offset-4 transition-all block"
-          href="/blogs/#probabilistic-data-structures-bloom-filter"
-        >
-          Probabilistic Data Structures: Bloom filter
-        </a>
-        <div class="w-full hand-wavy-stroke pt-2.5 overflow-hidden">
-          <svg
-            class="w-full h-2 stroke-current"
-            fill="none"
-            preserveAspectRatio="none"
-            viewBox="0 0 600 6"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M0 3.4 Q 35 1.5, 70 3.6 T 140 2.5 T 210 3.8 T 280 2.3 T 350 3.7 T 420 2.6 T 490 3.9 T 560 2.5 T 600 3.2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="1.3"
-            ></path>
-          </svg>
-        </div>
-      </li>
-      <li class="group pb-3 relative">
-        <span class="font-label-mono text-label-mono text-secondary uppercase block mb-0.5">
-          FEB 7, 2024
-        </span>
-        <a
-          class="font-headline-sm text-[1.125rem] text-on-surface group-hover:underline decoration-outline-variant decoration-1 underline-offset-4 transition-all block"
-          href="/blogs/#retry-mechanisms-in-laravel-and-distributed-queues"
-        >
-          Retry mechanisms in distributed queues
-        </a>
-        <div class="w-full hand-wavy-stroke pt-2.5 overflow-hidden">
-          <svg
-            class="w-full h-2 stroke-current"
-            fill="none"
-            preserveAspectRatio="none"
-            viewBox="0 0 600 6"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M0 2.9 Q 50 4.4, 100 2.8 T 200 3.7 T 300 2.4 T 400 3.8 T 500 2.6 T 600 3.3"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="1.3"
-            ></path>
-          </svg>
-        </div>
-      </li>
-      <li class="group pb-1 relative">
-        <span class="font-label-mono text-label-mono text-secondary uppercase block mb-0.5">
-          FEB 6, 2024
-        </span>
-        <a
-          class="font-headline-sm text-[1.125rem] text-on-surface group-hover:underline decoration-outline-variant decoration-1 underline-offset-4 transition-all block"
-          href="/blogs/#how-do-you-authenticate-mate"
-        >
-          How Do You Authenticate, Mate?
-        </a>
-      </li>
-    </ul>
-  </div>
-  <div class="hidden md:block absolute top-0 bottom-0 left-1/2 -ml-px w-2.5 hand-wavy-stroke pointer-events-none overflow-hidden">
-    <svg
-      class="w-2 h-full stroke-current"
-      fill="none"
-      preserveAspectRatio="none"
-      viewBox="0 0 6 800"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M3 0 Q 1.8 50, 3.2 100 T 2.7 200 T 3.3 300 T 2.6 400 T 3.3 500 T 2.7 600 T 3.2 700 T 2.9 800"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="1.2"
-      ></path>
-    </svg>
-  </div>
-
-  <div class="space-y-space-md">
-    <div class="flex items-baseline justify-between border-b border-outline-variant/30 pb-2">
-      <h3 class="font-headline-sm text-headline-sm text-on-surface">Curated</h3>
-      <span
-        class="font-label-mono text-label-mono text-secondary hover:text-primary uppercase tracking-wider flex items-center gap-0.5"
-        title="Coming soon"
-      >
-        ALL CONTENTS →
-      </span>
-    </div>
-    <ul class="space-y-4">
-      <li class="group pb-3 relative">
-        <span class="font-label-mono text-label-mono text-secondary uppercase block mb-0.5">
-          ARTICLE · SARAH MEI
-        </span>
-        <span class="font-headline-sm text-[1.125rem] text-on-surface group-hover:underline decoration-outline-variant decoration-1 underline-offset-4 transition-all block">
-          Pairing with Junior Developers
-        </span>
-        <div class="w-full hand-wavy-stroke pt-2.5 overflow-hidden">
-          <svg
-            class="w-full h-2 stroke-current"
-            fill="none"
-            preserveAspectRatio="none"
-            viewBox="0 0 600 6"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M0 3.1 Q 45 1.2, 90 3.6 T 180 2.5 T 270 3.9 T 360 2.4 T 450 3.8 T 540 2.5 T 600 3.3"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="1.3"
-            ></path>
-          </svg>
-        </div>
-      </li>
-      <li class="group pb-3 relative">
-        <span class="font-label-mono text-label-mono text-secondary uppercase block mb-0.5">
-          ARTICLE · GREG KOGAN
-        </span>
-        <span class="font-headline-sm text-[1.125rem] text-on-surface group-hover:underline decoration-outline-variant decoration-1 underline-offset-4 transition-all block">
-          Simple Systems Have Less Downtime
-        </span>
-        <div class="w-full hand-wavy-stroke pt-2.5 overflow-hidden">
-          <svg
-            class="w-full h-2 stroke-current"
-            fill="none"
-            preserveAspectRatio="none"
-            viewBox="0 0 600 6"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M0 2.8 Q 40 4.6, 80 2.7 T 160 3.8 T 240 2.4 T 320 3.9 T 400 2.5 T 480 3.7 T 560 2.6 T 600 3.2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="1.3"
-            ></path>
-          </svg>
-        </div>
-      </li>
-      <li class="group pb-3 relative">
-        <span class="font-label-mono text-label-mono text-secondary uppercase block mb-0.5">
-          ESSAY · DAN LUU
-        </span>
-        <span class="font-headline-sm text-[1.125rem] text-on-surface group-hover:underline decoration-outline-variant decoration-1 underline-offset-4 transition-all block">
-          Normalization of Deviance
-        </span>
-        <div class="w-full hand-wavy-stroke pt-2.5 overflow-hidden">
-          <svg
-            class="w-full h-2 stroke-current"
-            fill="none"
-            preserveAspectRatio="none"
-            viewBox="0 0 600 6"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M0 3.5 Q 50 1.6, 100 3.7 T 200 2.6 T 300 3.9 T 400 2.3 T 500 3.8 T 600 3.0"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="1.3"
-            ></path>
-          </svg>
-        </div>
-      </li>
-      <li class="group pb-1 relative">
-        <span class="font-label-mono text-label-mono text-secondary uppercase block mb-0.5">
-          TALK · RICH HICKEY
-        </span>
-        <span class="font-headline-sm text-[1.125rem] text-on-surface group-hover:underline decoration-outline-variant decoration-1 underline-offset-4 transition-all block">
-          Simple Made Easy
-        </span>
-      </li>
+            {post.data.title}
+          </a>
+          <p class="mt-2 font-body-sm text-body-sm text-on-surface-variant line-clamp-2">
+            {post.data.description}
+          </p>
+          {index < posts.length - 1 && (
+            <div class="w-full hand-wavy-stroke pt-2.5 overflow-hidden">
+              <svg
+                class="w-full h-2 stroke-current"
+                fill="none"
+                preserveAspectRatio="none"
+                viewBox="0 0 600 6"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M0 3.2 Q 40 1.0, 80 3.5 T 160 2.6 T 240 3.9 T 320 2.4 T 400 3.7 T 480 2.5 T 560 3.8 T 600 3.0"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1.3"
+                />
+              </svg>
+            </div>
+          )}
+        </li>
+      ))}
     </ul>
   </div>
 </section>
