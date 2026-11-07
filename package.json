@@ -17,6 +17,7 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.12",
+    "@astrojs/compiler-rs": "^0.5.2",
     "@emnapi/runtime": "1.11.3",
     "typescript": "^6.0.3",
     "vite-plus": "catalog:"
