@@ -6,6 +6,11 @@ const output = resolve("dist");
 const origin = "https://portfolio.test";
 const pages = new Map<string, string>();
 const routes = [
+  {
+    path: "/projects/navigatus-document-assistant/",
+    active: "/projects/",
+    heading: "Navigatus Internal Document Assistant",
+  },
   { path: "/blogs/", active: "/blogs/", heading: "Writing &amp; essays" },
   {
     path: "/blogs/webhook-for-you-and-me/",
