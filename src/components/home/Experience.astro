@@ -1,36 +1,108 @@
 ---
 import { Mail01Icon } from "@hugeicons/core-free-icons";
+import { profile, skills } from "../../data/profile";
 import Icon from "../ui/Icon.astro";
 ---
 
-<section class="space-y-space-sm pt-space-xs" id="experience">
-  <h2 class="font-headline-md text-headline-md text-on-surface">Work experience</h2>
-  <div class="space-y-space-sm">
-    <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
-      Ten years across product companies — from distributed PHP &amp; Go applications at East West
-      Media and IPvision, through Pathao’s core ride-sharing services, to senior engineering at
-      MyZenTeam, Kaz360, and Kahf Yazılım, designing systems that carry real scale.
+<section class="space-y-space-lg pt-space-xs" id="experience" aria-labelledby="experience-heading">
+  <div class="space-y-3">
+    <h2 id="experience-heading" class="font-headline-md text-headline-md text-on-surface">
+      Work experience
+    </h2>
+    <p class="font-body-md text-body-md text-on-surface-variant">
+      I build TypeScript backend and full-stack systems, with a focus on asynchronous workflows,
+      real-time communication, AI document processing, and third-party integrations. I own
+      production features from problem definition through implementation and operational rollout.
     </p>
-    <p class="font-body-md text-body-md text-on-surface">
-      I'm currently{" "}
-      <strong class="font-medium text-primary">open to new opportunities and consultations</strong>{" "}
-      —
+  </div>
+
+  <div class="space-y-space-md">
+    <article class="content-panel space-y-3">
+      <div class="metadata-row justify-between">
+        <span>Navigatus · Remote · Melbourne, Australia</span>
+        <span>March 2025–present</span>
+      </div>
+      <h3 class="font-headline-sm text-headline-sm">Software Engineer</h3>
+      <p class="font-body-sm text-body-sm text-on-surface-variant">
+        I automate operational workflows, build background processing with Redis and BullMQ, and
+        integrate finance and payroll systems with Xero. Automation reduced weekly processing from
+        65+ hours to around 2 hours. I also build participant management, NDIS plans, medication
+        tracking, and staff rostering systems used across around 200 staff and 300 participants.
+      </p>
+      <p class="font-body-sm text-body-sm text-on-surface-variant">
+        My work includes an internal RAG assistant for operational documents and real-time
+        notifications using SSE, Redis Pub/Sub, durable inbox storage, recipient authorization, and
+        idempotent background jobs.
+      </p>
+    </article>
+
+    <article class="content-panel space-y-3">
+      <div class="metadata-row justify-between">
+        <span>Mexemy · Cumilla, Bangladesh</span>
+        <span>November 2022–December 2024</span>
+      </div>
+      <h3 class="font-headline-sm text-headline-sm">Founding Full-Stack Engineer</h3>
+      <p class="font-body-sm text-body-sm text-on-surface-variant">
+        I developed and maintained the production web platform and internal automation for an
+        education business serving around 3,000–5,000 students. I built and led the company team,
+        including development, while managing daily operations and technical priorities as the
+        business grew to BDT 9M in annual revenue in 2024.
+      </p>
+      <p class="font-body-sm text-body-sm text-on-surface-variant">
+        I integrated Discord automation to reduce manual work around learner onboarding, community
+        access, and everyday operations.
+      </p>
+    </article>
+  </div>
+
+  <section class="space-y-space-md" aria-labelledby="skills-heading">
+    <h3 id="skills-heading" class="font-headline-sm text-headline-sm">
+      Technical skills
+    </h3>
+    <dl class="grid gap-space-md sm:grid-cols-2">
+      {skills.map(({ label, items }) => (
+        <div class="space-y-2">
+          <dt class="font-label-mono text-label-mono uppercase tracking-wider text-secondary">
+            {label}
+          </dt>
+          <dd class="font-body-sm text-body-sm text-on-surface-variant">{items.join(" · ")}</dd>
+        </div>
+      ))}
+    </dl>
+  </section>
+
+  <section class="space-y-2" aria-labelledby="education-heading">
+    <h3 id="education-heading" class="font-headline-sm text-headline-sm">
+      Education
+    </h3>
+    <p class="font-body-sm text-body-sm text-on-surface-variant">
+      Master of Social Work · Govt. Titumir College · 2025
+    </p>
+  </section>
+
+  <section class="space-y-3" aria-labelledby="contact-heading">
+    <h3 id="contact-heading" class="font-headline-sm text-headline-sm">
+      Get in touch
+    </h3>
+    <p class="font-label-mono text-label-mono text-secondary">{profile.location}</p>
+    <div class="flex flex-wrap items-center gap-x-5 gap-y-3 font-body-sm text-body-sm">
       <a
-        class="inline-flex items-center gap-1 font-medium underline underline-offset-4 decoration-outline-variant hover:decoration-primary transition-colors"
-        href="mailto:contact@shahrear.dev"
+        class="inline-flex items-center gap-2 underline underline-offset-4"
+        href={`mailto:${profile.email}`}
       >
-        get in touch <Icon icon={Mail01Icon} size={15} />
+        <Icon icon={Mail01Icon} size={16} /> {profile.email}
       </a>
-      .
-    </p>
-    <div>
+      <a class="underline underline-offset-4" href={profile.phoneHref}>
+        {profile.phone}
+      </a>
       <a
-        class="font-label-mono text-label-mono uppercase tracking-widest text-secondary hover:text-primary flex items-center gap-1 pt-1 group"
-        href="#experience"
+        class="underline underline-offset-4"
+        href={profile.linkedin}
+        target="_blank"
+        rel="noreferrer"
       >
-        <span class="">FULL STORY</span>
-        <span class="group-hover:translate-x-0.5 transition-transform">→</span>
+        LinkedIn
       </a>
     </div>
-  </div>
+  </section>
 </section>

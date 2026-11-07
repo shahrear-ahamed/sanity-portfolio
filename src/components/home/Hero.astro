@@ -1,11 +1,12 @@
 ---
 import { Github01Icon, File02Icon, GitBranchIcon, Mail01Icon } from "@hugeicons/core-free-icons";
+import { profile } from "../../data/profile";
 import Icon from "../ui/Icon.astro";
 const links = [
-  { label: "GitHub", href: "https://github.com/shahrear-ahamed", icon: Github01Icon },
+  { label: "GitHub", href: profile.github, icon: Github01Icon },
   { label: "Blogs", href: "#blogs", icon: File02Icon },
   { label: "Projects", href: "#works", icon: GitBranchIcon },
-  { label: "Email", href: "mailto:contact@shahrear.dev", icon: Mail01Icon },
+  { label: "Email", href: `mailto:${profile.email}`, icon: Mail01Icon },
 ];
 ---
 
@@ -31,8 +32,8 @@ const links = [
   </h1>
 
   <p class="hero-description" id="about">
-    Staff-level Software Engineer, builder of distributed platforms, and open-source craftsman
-    dedicated to resilient, low-latency architecture.
+    Software Engineer building TypeScript backend and full-stack systems, with a focus on
+    asynchronous workflows, real-time communication, AI document processing, and integrations.
   </p>
 
   <nav class="hero-links" aria-label="Connect and explore">

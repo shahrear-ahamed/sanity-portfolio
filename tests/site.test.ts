@@ -10,6 +10,25 @@ beforeAll(async () => {
 });
 
 describe("production homepage", () => {
+  it("renders the resume profile and removes unrelated experience", () => {
+    for (const text of [
+      "Navigatus",
+      "Mexemy",
+      "Technical skills",
+      "LangChain",
+      "Master of Social Work",
+      "its.shahrear@gmail.com",
+      "65+ hours",
+      "BDT 9M",
+    ]) {
+      expect(html).toContain(text);
+    }
+    expect(html).toContain('href="https://www.linkedin.com/in/shahrear-ahamed/"');
+    expect(html).not.toContain("Staff-level");
+    expect(html).not.toContain("East West");
+    expect(html).not.toContain("open to new opportunities");
+  });
+
   it("ships the recovery page and deployment security policy", async () => {
     const notFound = await readFile(resolve(output, "404.html"), "utf8");
     expect(notFound).toContain("Page not found");
