@@ -1,6 +1,7 @@
 {
   "name": "portfolio-shahrear",
   "compatibility_date": "2026-11-04",
+  "previews": {},
   "assets": {
     "directory": "./dist",
   },

@@ -51,6 +51,10 @@ Use these commands in Cloudflare Workers Builds:
 
 - Build command: `pnpm run build`
 - Deploy command: `pnpm dlx wrangler deploy`
+- Preview command: `pnpm dlx wrangler preview`
+
+The `previews` block in `wrangler.jsonc` enables Worker Previews for
+non-production branch builds.
 
 Use pnpm for deployment because the project requires pnpm in `devEngines`.
 
