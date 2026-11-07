@@ -1,32 +1,26 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
+import Experience from "../components/home/Experience.astro";
+import Hero from "../components/home/Hero.astro";
+import OpenSource from "../components/home/OpenSource.astro";
+import Writing from "../components/home/Writing.astro";
+import SketchDivider from "../components/ui/SketchDivider.astro";
+import SiteLayout from "../layouts/SiteLayout.astro";
 ---
 
-<BaseLayout title="Shahrear — Portfolio">
-  <div class="mx-auto flex min-h-svh max-w-6xl flex-col px-6 sm:px-12">
-    <header class="flex items-center justify-between border-b border-ink/15 py-7">
-      <a href="/" class="text-lg font-semibold tracking-tight">Shahrear<span class="text-accent">.</span></a>
-      <span class="font-mono text-xs tracking-wide text-ink/60">A NEW CHAPTER / 01</span>
-    </header>
+<SiteLayout
+  title="Shahrear Ahamed — Software Engineer"
+  description="Software engineering, systems that scale, open source, and thoughtful notes on the craft of building software."
+>
+  <Hero />
 
-    <main id="main-content" class="flex flex-1 flex-col justify-center py-24 sm:py-32">
-      <p class="mb-8 flex items-center gap-3 text-sm text-accent">
-        <span class="size-2 rounded-full bg-accent" aria-hidden="true"></span>
-        Portfolio in progress
-      </p>
-      <h1 class="max-w-4xl text-6xl leading-[1.05] font-medium tracking-[-0.06em] sm:text-8xl lg:text-9xl">
-        A fresh start.<br />
-        <span class="text-accent">A space to create.</span>
-      </h1>
-      <p class="mt-9 max-w-lg text-lg leading-relaxed text-ink/65">
-        I’m Shahrear. This is the beginning of my new portfolio — a home for
-        selected work, ideas, and what comes next.
-      </p>
-    </main>
+  <SketchDivider path="M0 3.2 Q 80 1.8, 160 3.4 T 320 2.6 T 480 3.5 T 640 2.5 T 800 3.4 T 960 2.7 T 1120 3.3 T 1200 2.9" />
+  <Experience />
 
-    <footer class="flex flex-col gap-3 border-t border-ink/15 py-6 text-xs text-ink/55 sm:flex-row sm:items-center sm:justify-between">
-      <p>© {new Date().getFullYear()} Shahrear</p>
-      <p>Made with intention.</p>
-    </footer>
-  </div>
-</BaseLayout>
+  <SketchDivider path="M0 2.8 Q 90 3.8, 180 2.7 T 360 3.4 T 540 2.5 T 720 3.5 T 900 2.6 T 1080 3.3 T 1200 2.8" />
+
+  <Writing />
+
+  <SketchDivider path="M0 3.0 Q 75 1.8, 150 3.3 T 300 2.6 T 450 3.4 T 600 2.7 T 750 3.3 T 900 2.6 T 1050 3.2 T 1200 2.8" />
+
+  <OpenSource />
+</SiteLayout>

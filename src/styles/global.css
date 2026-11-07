@@ -1,22 +1,294 @@
 @import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  --font-sans: "Segoe UI", sans-serif;
-  --color-paper: #f5f4ef;
-  --color-ink: #242922;
-  --color-accent: #466b48;
+  --color-surface: #f9f9f8;
+  --color-surface-dim: #dadad9;
+  --color-surface-bright: #f9f9f8;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-container-low: #f3f4f3;
+  --color-surface-container: #eeeeed;
+  --color-surface-container-high: #e8e8e7;
+  --color-surface-container-highest: #e2e2e2;
+  --color-on-surface: #1a1c1c;
+  --color-on-surface-variant: #47464b;
+  --color-inverse-surface: #2f3130;
+  --color-inverse-on-surface: #f1f1f0;
+  --color-outline: #77767b;
+  --color-outline-variant: #c8c5cb;
+  --color-surface-tint: #5f5e61;
+  --color-primary: #000000;
+  --color-on-primary: #ffffff;
+  --color-primary-container: #1b1b1e;
+  --color-on-primary-container: #858387;
+  --color-inverse-primary: #c8c5ca;
+  --color-secondary: #5d5e66;
+  --color-on-secondary: #ffffff;
+  --color-secondary-container: #e3e1ec;
+  --color-on-secondary-container: #63646c;
+  --color-tertiary: #000000;
+  --color-on-tertiary: #ffffff;
+  --color-tertiary-container: #002113;
+  --color-on-tertiary-container: #009668;
+  --color-error: #ba1a1a;
+  --color-on-error: #ffffff;
+  --color-error-container: #ffdad6;
+  --color-on-error-container: #93000a;
+  --color-primary-fixed: #e4e1e6;
+  --color-primary-fixed-dim: #c8c5ca;
+  --color-on-primary-fixed: #1b1b1e;
+  --color-on-primary-fixed-variant: #47464a;
+  --color-secondary-fixed: #e3e1ec;
+  --color-secondary-fixed-dim: #c6c5cf;
+  --color-on-secondary-fixed: #1a1b22;
+  --color-on-secondary-fixed-variant: #46464e;
+  --color-tertiary-fixed: #6ffbbe;
+  --color-tertiary-fixed-dim: #4edea3;
+  --color-on-tertiary-fixed: #002113;
+  --color-on-tertiary-fixed-variant: #005236;
+  --color-background: #f9f9f8;
+  --color-on-background: #1a1c1c;
+  --color-surface-variant: #e2e2e2;
+  --font-headline: "Instrument Serif", Georgia, serif;
+  --font-display: "Instrument Serif", Georgia, serif;
+  --font-body: "Instrument Serif", Georgia, serif;
+  --font-display-hero: "Instrument Serif", Georgia, serif;
+  --font-display-hero-mobile: "Instrument Serif", Georgia, serif;
+  --font-headline-lg: "Instrument Serif", Georgia, serif;
+  --font-headline-lg-mobile: "Instrument Serif", Georgia, serif;
+  --font-headline-md: "Instrument Serif", Georgia, serif;
+  --font-headline-sm: "Instrument Serif", Georgia, serif;
+  --font-body-lg: "Instrument Serif", Georgia, serif;
+  --font-body-md: "Instrument Serif", Georgia, serif;
+  --font-body-sm: "Instrument Serif", Georgia, serif;
+  --font-label: "JetBrains Mono", monospace;
+  --font-label-mono: "JetBrains Mono", monospace;
+  --font-nav-link: "JetBrains Mono", monospace;
+  --text-display-hero: 3.5rem;
+  --text-display-hero--line-height: 1.15;
+  --text-display-hero-mobile: 2.25rem;
+  --text-display-hero-mobile--line-height: 1.2;
+  --text-headline-lg: 2rem;
+  --text-headline-lg--line-height: 1.25;
+  --text-headline-md: 1.5rem;
+  --text-headline-md--line-height: 1.35;
+  --text-headline-sm: 1.25rem;
+  --text-headline-sm--line-height: 1.4;
+  --text-body-lg: 1.125rem;
+  --text-body-lg--line-height: 1.75;
+  --text-body-md: 0.9375rem;
+  --text-body-md--line-height: 1.65;
+  --text-body-sm: 0.8125rem;
+  --text-body-sm--line-height: 1.5;
+  --text-label-mono: 0.6875rem;
+  --text-label-mono--line-height: 1.2;
+  --text-nav-link: 0.8125rem;
+  --text-nav-link--line-height: 1;
+  --spacing-space-xs: 0.25rem;
+  --spacing-space-sm: 0.5rem;
+  --spacing-space-md: 1rem;
+  --spacing-space-lg: 1.75rem;
+  --spacing-space-xl: 3rem;
+  --spacing-space-2xl: 5rem;
+  --spacing-margin: 1.25rem;
+  --spacing-margin-desktop: 2rem;
+  --spacing-gutter: 1.5rem;
+  --spacing-gutter-desktop: 2.5rem;
+}
+
+.material-symbols-outlined {
+  font-variation-settings:
+    "FILL" 0,
+    "wght" 400,
+    "GRAD" 0,
+    "opsz" 20;
+  display: inline-block;
+  vertical-align: middle;
+  line-height: 1;
+}
+.sketched-border {
+  border: 1px dashed #d4d4d8;
+  position: relative;
+}
+.sketched-border::before,
+.sketched-border::after {
+  content: "";
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border: 1px solid #a1a1aa;
+}
+.sketched-border::before {
+  top: -3px;
+  left: -3px;
+}
+.sketched-border::after {
+  bottom: -3px;
+  right: -3px;
+}
+.hairpin-divider {
+  background-image: linear-gradient(to right, transparent, #c8c5cb 20%, #c8c5cb 80%, transparent);
+  height: 1px;
+}
+
+h1,
+h2,
+h3,
+.font-display-hero,
+[class*="font-headline"] {
+  font-family: "Instrument Serif", Georgia, serif !important;
+  font-weight: 400 !important;
+  letter-spacing: -0.015em !important;
+}
+p,
+article,
+.text-body-lg,
+.text-body-md,
+.text-body-sm,
+.text-on-surface-variant {
+  font-family: Georgia, "Times New Roman", serif !important;
+  line-height: 1.7 !important;
+}
+#overview .font-headline-sm.italic {
+  font-family: "Instrument Serif", Georgia, serif !important;
+  font-style: italic !important;
+  font-size: 1.45rem !important;
+}
+code,
+pre,
+.font-label-mono,
+[class*="font-label-mono"],
+.font-nav-link {
+  font-family: "JetBrains Mono", monospace, ui-monospace, sans-serif !important;
+}
+
+.sketched-border {
+  border: 1.5px dashed #52525b !important;
+  position: relative;
+}
+.sketched-border::before,
+.sketched-border::after {
+  content: "";
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border: 1.5px solid #3f3f46 !important;
+}
+.sketched-border::before {
+  top: -4px;
+  left: -4px;
+}
+.sketched-border::after {
+  bottom: -4px;
+  right: -4px;
+}
+.dark .sketched-border {
+  border-color: #a1a1aa !important;
+}
+.dark .sketched-border::before,
+.dark .sketched-border::after {
+  border-color: #cbd5e1 !important;
+}
+.wobbly-card {
+  border-radius: 120px 8px 110px 10px / 10px 110px 8px 120px !important;
+  border: 1.5px solid #52525b !important;
+  position: relative;
+  transition: all 0.2s ease;
+}
+.wobbly-card:nth-child(2) {
+  border-radius: 10px 125px 12px 115px / 115px 10px 125px 10px !important;
+}
+.wobbly-card:nth-child(3) {
+  border-radius: 115px 12px 110px 10px / 10px 115px 12px 110px !important;
+}
+.wobbly-card:nth-child(4) {
+  border-radius: 12px 115px 10px 120px / 120px 12px 115px 10px !important;
+}
+.wobbly-card:nth-child(5) {
+  border-radius: 120px 10px 112px 12px / 12px 112px 10px 120px !important;
+}
+.wobbly-card:nth-child(6) {
+  border-radius: 10px 118px 12px 114px / 114px 10px 118px 12px !important;
+}
+.wobbly-card:hover {
+  border-color: #18181b !important;
+}
+.dark .wobbly-card {
+  border-color: #71717a !important;
+}
+.dark .wobbly-card:hover {
+  border-color: #f4f4f5 !important;
+}
+.wobbly-pill {
+  border-radius: 140px 14px 130px 14px / 14px 130px 14px 140px !important;
+  border: 1.5px solid #52525b !important;
+}
+.dark .wobbly-pill {
+  border-color: #71717a !important;
+}
+.hand-wavy-stroke {
+  color: #52525b;
+  stroke-width: 1.4;
+}
+.dark .hand-wavy-stroke {
+  color: #9ca3af;
+  stroke-width: 1.4;
 }
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 7rem;
+  }
   body {
-    @apply m-0 bg-paper font-sans text-ink antialiased;
+    margin: 0;
+    font-family: "Instrument Serif", Georgia, serif;
   }
-
-  ::selection {
-    @apply bg-accent text-white;
+  :focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 4px;
   }
-
-  a:focus-visible {
-    @apply rounded-sm outline-2 outline-offset-4 outline-accent;
+  button,
+  a,
+  input {
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+.dark {
+  --color-background: #191b1b;
+  --color-surface: #191b1b;
+  --color-surface-bright: #222424;
+  --color-surface-container-lowest: #232525;
+  --color-surface-container-low: #242626;
+  --color-surface-container: #303232;
+  --color-on-surface: #eeeee9;
+  --color-on-surface-variant: #c1c1bc;
+  --color-secondary: #b6b6bc;
+  --color-primary: #f4f4ef;
+  --color-outline: #aaa8ad;
+  --color-outline-variant: #77767b;
+}
+@media (max-width: 639px) {
+  .text-display-hero {
+    font-size: 2.25rem;
+    line-height: 1.2;
+  }
+  main,
+  header > div,
+  footer > div {
+    padding-inline: 1.25rem;
+  }
+  #home {
+    padding: 1.75rem 1rem;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0s !important;
   }
 }

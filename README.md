@@ -2,6 +2,39 @@
 
 A fresh, local portfolio project built with Astro, Vite+, TypeScript 6, and Tailwind CSS 4.
 
+## Production checks
+
+Run `vp run validate` for formatting, lint, TypeScript, Astro diagnostics, a fresh
+production build, and output tests. Local pre-commit hooks run staged checks,
+Astro diagnostics, and build-and-test validation. Cloudflare builds the site on
+deployment; no separate GitHub CI workflow is configured.
+
+Dependabot proposes weekly dependency updates. Review compatibility
+before merging, especially the TypeScript/checker pair, Vite override, and
+`@emnapi/runtime` pin. Dependency updates are not automatically merged.
+
+`public/_headers` adds Cloudflare static-response security headers and long-lived
+caching only for fingerprinted `/_astro/` assets. HTML and unversioned images
+retain platform caching defaults. `src/pages/404.astro` supplies a recovery page.
+Verify actual HTTP headers and a missing URL after deploying; output tests alone
+cannot verify Cloudflare behavior.
+
+### Remaining launch work
+
+- Set the final production domain before adding canonical URLs, sitemap,
+  domain-specific robots rules, and complete social sharing metadata.
+- Add browser tests for theme persistence, keyboard navigation, and newsletter
+  behavior, plus accessibility and mobile performance checks.
+- Connect a newsletter provider before offering real subscriptions; replace
+  reference content and article placeholders with finished content.
+- Configure uptime alerts and review Cloudflare errors after deployment.
+- Test a Content Security Policy against the inline theme script and Google
+  font dependencies before enforcing it. Self-hosting fonts can simplify this.
+
+Coverage thresholds are not enabled: current tests validate generated HTML and
+assets, so a source coverage percentage would not measure interaction coverage.
+No backend, database, or authentication is needed for the current static scope.
+
 ## Getting started
 
 Use Node.js 22.23.4 or newer and the [Vite+ CLI](https://viteplus.dev/guide/).
@@ -38,7 +71,7 @@ src/pages/              Astro file-based routes
 src/styles/global.css   Tailwind import, theme tokens, and base styles
 ```
 
-The homepage is a minimal starting point for the portfolio design. Update
+The homepage follows the editorial design system documented in `DESIGN.md`. Update
 `src/pages/index.astro` to build out the site and `src/styles/global.css`
 to customize the theme. No CMS is configured.
 
@@ -65,3 +98,49 @@ TypeScript files.
 `@emnapi/runtime` is pinned to 1.11.3 to match the runtime used by
 Astro’s `astro2tsx` converter. The automatically resolved 2.0 beta crashes
 when loading the checker. Revisit this pin when upgrading Astro’s checker.
+
+## Design references
+
+`DESIGN.md` is versioned design guidance. The local `design/` folder is ignored
+and must not be committed. The homepage adapts `design/home.html` into Astro
+with compiled Tailwind styles and a persistent theme toggle. Reference article
+content is retained for design review; newsletter subscriptions
+and article detail pages are not yet connected.
+
+## Reusable components
+
+Pages use `src/layouts/SiteLayout.astro` for the shared header, footer,
+background, and main content container. Pass `title` and an optional
+`description`, and put page content inside the layout slot.
+
+- `src/components/layout/`: shared header, footer, and background.
+- `src/components/home/`: homepage sections and newsletter.
+- `src/components/ui/`: theme toggle, sketch divider, and project card.
+
+Interactive scripts live with their components. `BaseLayout.astro` owns the
+HTML document, metadata, fonts, global stylesheet, and initial theme selection.
+
+## Formatting
+
+Use `vp fmt` to format the project and `vp fmt --check` to check formatting.
+The `fmt` block in `vite.config.ts` enables Astro formatting with
+`@astrojs/compiler-rs`, two-space indentation, and a 100-character preferred
+line width. The local `design/` references are excluded.
+
+Install the recommended Oxc extension in VS Code to use the same formatter
+on save. `.editorconfig` keeps basic whitespace consistent in other editors.
+
+## Commit hooks
+
+Vite+ runs `vp staged` before each commit to format and check staged files,
+then `vp run check` checks Astro templates and TypeScript. Failed checks stop
+the commit. Staged checks can automatically fix and restage supported files.
+The hook also runs `vp run test`, which builds the site and tests the generated
+page structure, internal anchor destinations, and local asset availability.
+
+The `prepare` script installs hooks after dependency installation. For an
+existing checkout, run `vp hooks enable`; inspect setup with `vp hooks status`.
+
+Run `vp run test` for the complete build-and-test workflow. `vp test` runs only
+the tests against an existing `dist/` build. These checks do not replace browser
+testing for visual appearance or client interactions.
