@@ -26,7 +26,7 @@ const dateLabel = (date: Date) =>
     </div>
     <ul class="space-y-4">
       {posts.map((post, index) => (
-        <li class="group pb-3 relative">
+        <li class="group relative content-panel">
           <time
             datetime={post.data.date.toISOString().slice(0, 10)}
             class="font-label-mono text-label-mono text-secondary uppercase block mb-0.5"

@@ -9,7 +9,7 @@ const { categories, placeholder } = Astro.props;
 ---
 
 <catalog-filter>
-  <div class="search-field">
+  <div class="search-field bg-surface-container-lowest/70">
     <Icon icon={Search01Icon} class="shrink-0" />
     <input type="search" aria-label={placeholder} placeholder={placeholder} />
     <kbd aria-hidden="true">⌘ / Ctrl K</kbd>
@@ -85,7 +85,6 @@ const { categories, placeholder } = Astro.props;
     align-items: center;
     gap: 0.75rem;
     padding: 0.75rem 1rem;
-    background: var(--color-surface-container-lowest);
     border: 1px solid var(--color-outline);
     border-radius: 90px 8px 80px 7px / 7px 80px 8px 90px;
   }
