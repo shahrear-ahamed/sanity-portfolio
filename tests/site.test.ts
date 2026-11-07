@@ -16,10 +16,7 @@ describe("production homepage", () => {
       "Mexemy",
       "Technical skills",
       "LangChain",
-      "Master of Social Work",
       "its.shahrear@gmail.com",
-      "65+ hours",
-      "BDT 9M",
     ]) {
       expect(html).toContain(text);
     }

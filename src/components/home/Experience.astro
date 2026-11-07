@@ -1,7 +1,5 @@
 ---
-import { Mail01Icon } from "@hugeicons/core-free-icons";
-import { profile, skills } from "../../data/profile";
-import Icon from "../ui/Icon.astro";
+import { skills } from "../../data/profile";
 ---
 
 <section class="space-y-space-lg pt-space-xs" id="experience" aria-labelledby="experience-heading">
@@ -9,49 +7,23 @@ import Icon from "../ui/Icon.astro";
     <h2 id="experience-heading" class="font-headline-md text-headline-md text-on-surface">
       Work experience
     </h2>
-    <p class="font-body-md text-body-md text-on-surface-variant">
-      I build TypeScript backend and full-stack systems, with a focus on asynchronous workflows,
-      real-time communication, AI document processing, and third-party integrations. I own
-      production features from problem definition through implementation and operational rollout.
-    </p>
   </div>
 
   <div class="space-y-space-md">
     <article class="content-panel space-y-3">
+      <h3 class="font-headline-sm text-headline-sm">Software Engineer</h3>
       <div class="metadata-row justify-between">
         <span>Navigatus · Remote · Melbourne, Australia</span>
-        <span>March 2025–present</span>
+        <span>Mar 2025 – Present</span>
       </div>
-      <h3 class="font-headline-sm text-headline-sm">Software Engineer</h3>
-      <p class="font-body-sm text-body-sm text-on-surface-variant">
-        I automate operational workflows, build background processing with Redis and BullMQ, and
-        integrate finance and payroll systems with Xero. Automation reduced weekly processing from
-        65+ hours to around 2 hours. I also build participant management, NDIS plans, medication
-        tracking, and staff rostering systems used across around 200 staff and 300 participants.
-      </p>
-      <p class="font-body-sm text-body-sm text-on-surface-variant">
-        My work includes an internal RAG assistant for operational documents and real-time
-        notifications using SSE, Redis Pub/Sub, durable inbox storage, recipient authorization, and
-        idempotent background jobs.
-      </p>
     </article>
 
     <article class="content-panel space-y-3">
+      <h3 class="font-headline-sm text-headline-sm">Founding Full-Stack Engineer</h3>
       <div class="metadata-row justify-between">
         <span>Mexemy · Cumilla, Bangladesh</span>
-        <span>November 2022–December 2024</span>
+        <span>Nov 2022 – Dec 2024</span>
       </div>
-      <h3 class="font-headline-sm text-headline-sm">Founding Full-Stack Engineer</h3>
-      <p class="font-body-sm text-body-sm text-on-surface-variant">
-        I developed and maintained the production web platform and internal automation for an
-        education business serving around 3,000–5,000 students. I built and led the company team,
-        including development, while managing daily operations and technical priorities as the
-        business grew to BDT 9M in annual revenue in 2024.
-      </p>
-      <p class="font-body-sm text-body-sm text-on-surface-variant">
-        I integrated Discord automation to reduce manual work around learner onboarding, community
-        access, and everyday operations.
-      </p>
     </article>
   </div>
 
@@ -69,40 +41,5 @@ import Icon from "../ui/Icon.astro";
         </div>
       ))}
     </dl>
-  </section>
-
-  <section class="space-y-2" aria-labelledby="education-heading">
-    <h3 id="education-heading" class="font-headline-sm text-headline-sm">
-      Education
-    </h3>
-    <p class="font-body-sm text-body-sm text-on-surface-variant">
-      Master of Social Work · Govt. Titumir College · 2025
-    </p>
-  </section>
-
-  <section class="space-y-3" aria-labelledby="contact-heading">
-    <h3 id="contact-heading" class="font-headline-sm text-headline-sm">
-      Get in touch
-    </h3>
-    <p class="font-label-mono text-label-mono text-secondary">{profile.location}</p>
-    <div class="flex flex-wrap items-center gap-x-5 gap-y-3 font-body-sm text-body-sm">
-      <a
-        class="inline-flex items-center gap-2 underline underline-offset-4"
-        href={`mailto:${profile.email}`}
-      >
-        <Icon icon={Mail01Icon} size={16} /> {profile.email}
-      </a>
-      <a class="underline underline-offset-4" href={profile.phoneHref}>
-        {profile.phone}
-      </a>
-      <a
-        class="underline underline-offset-4"
-        href={profile.linkedin}
-        target="_blank"
-        rel="noreferrer"
-      >
-        LinkedIn
-      </a>
-    </div>
   </section>
 </section>
