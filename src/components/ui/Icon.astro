@@ -1,0 +1,24 @@
+---
+import type { Github01Icon } from "@hugeicons/core-free-icons";
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<"svg"> {
+  icon: typeof Github01Icon;
+  size?: number;
+}
+const { icon, size = 18, ...attributes } = Astro.props;
+---
+
+<svg width={size} height={size} viewBox="0 0 24 24" fill="none" aria-hidden="true" {...attributes}>
+  {icon.map(([Tag, properties]) => {
+    const attrs = Object.fromEntries(
+      Object.entries(properties)
+        .filter(([name]) => name !== "key")
+        .map(([name, value]) => [
+          name.replace(/[A-Z]/g, (letter) => `-${letter.toLowerCase()}`),
+          value,
+        ]),
+    );
+    return <Tag {...attrs} />;
+  })}
+</svg>

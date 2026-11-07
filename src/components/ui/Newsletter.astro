@@ -1,3 +1,8 @@
+---
+import { AtIcon } from "@hugeicons/core-free-icons";
+import Icon from "./Icon.astro";
+---
+
 <aside
   aria-label="Newsletter"
   class="text-center pt-space-md border-t border-outline-variant/30 max-w-115 mx-auto space-y-3"
@@ -16,7 +21,7 @@
     id="newsletter-form"
   >
     <div class="pl-3 pr-1 text-on-surface-variant flex items-center">
-      <span class="material-symbols-outlined text-[16px]">alternate_email</span>
+      <Icon icon={AtIcon} size={16} />
     </div>
     <input
       class="w-full bg-transparent border-none text-body-sm font-body-sm text-on-surface placeholder:text-outline-variant focus:ring-0 focus:outline-none py-1 px-1"

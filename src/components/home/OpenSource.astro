@@ -1,4 +1,5 @@
 ---
+import { CodeIcon } from "@hugeicons/core-free-icons";
 import { getCollection } from "astro:content";
 import ProjectCard from "../ui/ProjectCard.astro";
 const projects = (await getCollection("projects"))
@@ -22,7 +23,7 @@ const projects = (await getCollection("projects"))
         href={`/projects/${project.id}/`}
         title={project.data.title}
         language={project.data.stack[0] ?? "PROJECT"}
-        icon="code"
+        icon={CodeIcon}
         detail={project.data.category}
       >
         {project.data.description}

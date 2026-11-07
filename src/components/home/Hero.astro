@@ -1,9 +1,11 @@
 ---
+import { Github01Icon, File02Icon, GitBranchIcon, Mail01Icon } from "@hugeicons/core-free-icons";
+import Icon from "../ui/Icon.astro";
 const links = [
-  { label: "GitHub", href: "https://github.com/shahrear-ahamed", icon: "terminal" },
-  { label: "Writing", href: "#blogs", icon: "document" },
-  { label: "Projects", href: "/projects/", icon: "branch" },
-  { label: "Email", href: "mailto:contact@shahrear.dev", icon: "mail" },
+  { label: "GitHub", href: "https://github.com/shahrear-ahamed", icon: Github01Icon },
+  { label: "Writing", href: "#blogs", icon: File02Icon },
+  { label: "Projects", href: "/projects/", icon: GitBranchIcon },
+  { label: "Email", href: "mailto:contact@shahrear.dev", icon: Mail01Icon },
 ];
 ---
 
@@ -36,44 +38,7 @@ const links = [
   <nav class="hero-links" aria-label="Connect and explore">
     {links.map(({ label, href, icon }) => (
       <a href={href} aria-label={label} title={label}>
-        <svg
-          aria-hidden="true"
-          width="20"
-          height="20"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="1.35"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        >
-          {icon === "terminal" && (
-            <>
-              <rect x="4" y="5" width="16" height="14" rx="1" />
-              <path d="m8 9 3 3-3 3m5 0h3" />
-            </>
-          )}
-          {icon === "document" && (
-            <>
-              <path d="M6 3h8l4 4v14H6z" />
-              <path d="M14 3v5h4M9 12h6m-6 3h6m-6 3h4" />
-            </>
-          )}
-          {icon === "branch" && (
-            <>
-              <rect x="4" y="3" width="5" height="5" rx=".5" />
-              <rect x="15" y="10" width="5" height="5" rx=".5" />
-              <rect x="4" y="16" width="5" height="5" rx=".5" />
-              <path d="M6.5 8v8m0-3.5H15" />
-            </>
-          )}
-          {icon === "mail" && (
-            <>
-              <rect x="4" y="5" width="16" height="14" rx="1" />
-              <path d="m4 6 8 7 8-7" />
-            </>
-          )}
-        </svg>
+        <Icon icon={icon} size={20} />
       </a>
     ))}
   </nav>

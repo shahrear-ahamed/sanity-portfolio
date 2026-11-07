@@ -1,9 +1,11 @@
 ---
+import type { Github01Icon } from "@hugeicons/core-free-icons";
+import Icon from "./Icon.astro";
 interface Props {
   title: string;
   href?: string;
   language: string;
-  icon: string;
+  icon: typeof Github01Icon;
   detail: string;
 }
 const { title, href, language, icon, detail } = Astro.props;
@@ -30,7 +32,7 @@ const { title, href, language, icon, detail } = Astro.props;
     </p>
   </div>
   <div class="pt-3 flex items-center gap-2 text-label-mono text-secondary font-label-mono">
-    <span class="material-symbols-outlined text-[13px]">{icon}</span>
+    <Icon icon={icon} size={13} />
     <span>{detail}</span>
   </div>
 </article>

@@ -1,4 +1,6 @@
 ---
+import { Search01Icon } from "@hugeicons/core-free-icons";
+import Icon from "../ui/Icon.astro";
 interface Props {
   categories: string[];
   placeholder: string;
@@ -8,18 +10,7 @@ const { categories, placeholder } = Astro.props;
 
 <catalog-filter>
   <div class="search-field">
-    <svg
-      aria-hidden="true"
-      width="18"
-      height="18"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      stroke-width="1.5"
-    >
-      <circle cx="10.5" cy="10.5" r="6.5" />
-      <path d="m16 16 5 5" />
-    </svg>
+    <Icon icon={Search01Icon} class="shrink-0" />
     <input type="search" aria-label={placeholder} placeholder={placeholder} />
     <kbd aria-hidden="true">⌘ / Ctrl K</kbd>
   </div>
@@ -94,9 +85,9 @@ const { categories, placeholder } = Astro.props;
     align-items: center;
     gap: 0.75rem;
     padding: 0.75rem 1rem;
+    background: var(--color-surface-container-lowest);
     border: 1px solid var(--color-outline);
     border-radius: 90px 8px 80px 7px / 7px 80px 8px 90px;
-    background: var(--color-surface-container-lowest);
   }
   .search-field:focus-within {
     outline: 1px solid var(--color-primary);
