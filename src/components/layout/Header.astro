@@ -1,5 +1,13 @@
 ---
 import ThemeToggle from "../ui/ThemeToggle.astro";
+const pathname = Astro.url.pathname;
+const navigation = [
+  { label: "/home", href: "/#home", active: pathname === "/" },
+  { label: "/experience", href: "/#experience", active: false },
+  { label: "/projects", href: "/projects/", active: pathname.startsWith("/projects") },
+  { label: "/blogs", href: "/blogs/", active: pathname.startsWith("/blogs") },
+  { label: "/about", href: "/#about", active: false },
+];
 ---
 
 <header class="docked full-width top-0 sticky z-50 bg-surface/90 backdrop-blur-md border-outline-variant/30">
@@ -15,36 +23,20 @@ import ThemeToggle from "../ui/ThemeToggle.astro";
       aria-label="Main navigation"
       class="flex flex-wrap justify-center items-center gap-3 order-3 w-full md:order-0 md:w-auto"
     >
-      <a
-        class="text-nav-link font-nav-link text-primary border-b border-primary pb-0.5 transition-colors duration-150"
-        href="/#home"
-      >
-        /home
-      </a>
-      <a
-        class="text-nav-link font-nav-link text-on-surface-variant hover:text-on-surface transition-colors duration-150"
-        href="/#experience"
-      >
-        /experience
-      </a>
-      <a
-        class="text-nav-link font-nav-link text-on-surface-variant hover:text-on-surface transition-colors duration-150"
-        href="/#works"
-      >
-        /projects
-      </a>
-      <a
-        class="text-nav-link font-nav-link text-on-surface-variant hover:text-on-surface transition-colors duration-150"
-        href="/#blogs"
-      >
-        /blogs
-      </a>
-      <a
-        class="text-nav-link font-nav-link text-on-surface-variant hover:text-on-surface transition-colors duration-150"
-        href="/#about"
-      >
-        /about
-      </a>
+      {navigation.map(({ label, href, active }) => (
+        <a
+          class:list={[
+            "text-nav-link font-nav-link pb-0.5 transition-colors duration-150",
+            active
+              ? "text-primary border-b border-primary"
+              : "text-on-surface-variant hover:text-on-surface",
+          ]}
+          href={href}
+          aria-current={active ? "page" : undefined}
+        >
+          {label}
+        </a>
+      ))}
     </nav>
 
     <div class="flex items-center space-x-2.5">

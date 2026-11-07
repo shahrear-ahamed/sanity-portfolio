@@ -1,0 +1,148 @@
+---
+import { getCollection } from "astro:content";
+import FilterBar from "../../components/content/FilterBar.astro";
+import SketchDivider from "../../components/ui/SketchDivider.astro";
+import { posts as summaries } from "../../data/catalog";
+import SiteLayout from "../../layouts/SiteLayout.astro";
+
+const entries = await getCollection("blogs");
+const dateLabel = (date: Date) =>
+  date
+    .toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+      timeZone: "UTC",
+    })
+    .toUpperCase();
+const posts = [
+  ...entries.map((entry) => {
+    return {
+      slug: entry.id,
+      title: entry.data.title,
+      date: dateLabel(entry.data.date),
+      isoDate: entry.data.date.toISOString().slice(0, 10),
+      excerpt: entry.data.description,
+      category: entry.data.category,
+      words:
+        entry.data.words ??
+        `~${(entry.body ?? "").trim().split(/\s+/).filter(Boolean).length} words`,
+      href: `/blogs/${entry.id}/`,
+    };
+  }),
+  ...summaries
+    .filter((post) => !entries.some((entry) => entry.id === post.slug))
+    .map((post) => ({
+      ...post,
+      isoDate: new Date(`${post.date} UTC`).toISOString().slice(0, 10),
+      href: undefined,
+    })),
+].sort((a, b) => b.isoDate.localeCompare(a.isoDate));
+const categories = [...new Set(posts.map((post) => post.category))];
+---
+
+<SiteLayout
+  title="Writing & Essays — Shahrear Ahamed"
+  description="Notes on software engineering, distributed systems, and the craft of building software."
+>
+  <header class="space-y-space-md">
+    <span class="font-label-mono text-label-mono text-secondary uppercase tracking-widest">
+      The notebook
+    </span>
+    <h1 class="font-display-hero text-display-hero text-on-surface">Writing &amp; essays</h1>
+    <p class="font-body-lg text-body-lg text-on-surface-variant max-w-135">
+      Notes from building software: the systems behind it, the ideas that make it work, and the
+      lessons that stay with us.
+    </p>
+  </header>
+
+  <div data-filter-catalog>
+    <FilterBar categories={categories} placeholder="Search articles, topics, or code…" />
+
+    <section aria-label="Articles" class="article-list">
+      {posts.map((post, index) => (
+        <article
+          id={post.slug}
+          class="archive-entry"
+          data-filter-item
+          data-category={post.category}
+          data-search={`${post.title} ${post.excerpt} ${post.category}`}
+        >
+          <div class="flex flex-wrap items-center gap-3 mb-2">
+            <time
+              datetime={post.isoDate}
+              class="font-label-mono text-label-mono text-secondary uppercase tracking-wider"
+            >
+              {post.date}
+            </time>
+            {index === 0 && (
+              <span class="font-label-mono text-[10px] rounded px-2 py-1 bg-surface-container text-on-surface-variant">
+                Latest note
+              </span>
+            )}
+          </div>
+          <h2 class="font-headline-lg text-headline-lg text-on-surface">
+            {post.href ? (
+              <a
+                href={post.href}
+                class="hover:underline decoration-outline underline-offset-4 decoration-1"
+              >
+                {post.title}
+              </a>
+            ) : (
+              post.title
+            )}
+          </h2>
+          <p class="font-body-md text-body-md text-on-surface-variant mt-3">{post.excerpt}</p>
+          <div class="flex flex-wrap items-center gap-3 mt-4 font-label-mono text-label-mono text-secondary">
+            {post.words && (
+              <>
+                <span>{post.words}</span>
+                <span aria-hidden="true">·</span>
+              </>
+            )}
+            <span class="topic-tag">{post.category}</span>
+            {post.href && (
+              <a
+                class="ml-auto text-on-surface hover:underline underline-offset-4 py-1"
+                href={post.href}
+                aria-label={`Read ${post.title}`}
+              >
+                Read essay →
+              </a>
+            )}
+          </div>
+          <SketchDivider />
+        </article>
+      ))}
+    </section>
+  </div>
+</SiteLayout>
+
+<style>
+  .article-list {
+    margin-top: var(--spacing-space-xl);
+  }
+
+  .archive-entry {
+    scroll-margin-top: 8rem;
+  }
+
+  .archive-entry:last-child :global(.hand-wavy-stroke) {
+    display: none;
+  }
+
+  .topic-tag {
+    padding: 0.3rem 0.5rem;
+    border: 1px solid var(--color-outline-variant);
+    border-radius: 0.25rem;
+    background: var(--color-surface-container-low);
+    color: var(--color-on-surface-variant);
+  }
+
+  @media (max-width: 639px) {
+    .archive-entry h2 {
+      font-size: 1.625rem;
+    }
+  }
+</style>

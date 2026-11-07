@@ -1,5 +1,10 @@
 ---
+import { getCollection } from "astro:content";
 import ProjectCard from "../ui/ProjectCard.astro";
+const projectEntries = await getCollection("projects");
+const pulseDeck = projectEntries.find((entry) =>
+  entry.data.title.toLowerCase().startsWith("pulsedeck"),
+);
 ---
 
 <section class="space-y-space-md" id="works">
@@ -7,20 +12,25 @@ import ProjectCard from "../ui/ProjectCard.astro";
     <h2 class="font-headline-md text-headline-md text-on-surface">Open source</h2>
     <a
       class="font-label-mono text-label-mono text-secondary hover:text-primary uppercase tracking-wider flex items-center gap-0.5"
-      href="https://github.com/shahrear-ahamed"
-      rel="noreferrer"
-      target="_blank"
+      href="/projects/"
     >
       ALL PROJECTS →
     </a>
   </div>
   <div class="grid grid-cols-1 sm:grid-cols-2 gap-space-sm pt-2">
-    <ProjectCard title={"GLWTPL"} language={"TEXT"} icon={"balance"} detail={"Permissive"}>
+    <ProjectCard
+      href="/projects/#glwtpl-public-license"
+      title={"GLWTPL"}
+      language={"TEXT"}
+      icon={"balance"}
+      detail={"Permissive"}
+    >
       The "Good Luck With That" Public License — a humorous yet poignant software license for code
       you're releasing with zero guarantees.
     </ProjectCard>
 
     <ProjectCard
+      href="/projects/#bangla-programming-resources"
       title={"Bangla Programming Resources"}
       language={"MARKDOWN"}
       icon={"stars"}
@@ -31,6 +41,7 @@ import ProjectCard from "../ui/ProjectCard.astro";
     </ProjectCard>
 
     <ProjectCard
+      href="/projects/#devtools-desktop"
       title={"DevTools"}
       language={"TYPESCRIPT"}
       icon={"desktop_windows"}
@@ -40,7 +51,13 @@ import ProjectCard from "../ui/ProjectCard.astro";
       converters running entirely offline.
     </ProjectCard>
 
-    <ProjectCard title={"PulseDeck"} language={"GO"} icon={"smart_toy"} detail={"LLM Tooling"}>
+    <ProjectCard
+      href={pulseDeck ? `/projects/${pulseDeck.id}/` : "/projects/"}
+      title={"PulseDeck"}
+      language={"GO"}
+      icon={"smart_toy"}
+      detail={"LLM Tooling"}
+    >
       The real-time inbox for your autonomous AI agents — an aggregated cockpit to review agent
       milestones and flag items needing human review.
     </ProjectCard>

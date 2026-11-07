@@ -1,17 +1,26 @@
 ---
 interface Props {
   title: string;
+  href?: string;
   language: string;
   icon: string;
   detail: string;
 }
-const { title, language, icon, detail } = Astro.props;
+const { title, href, language, icon, detail } = Astro.props;
 ---
 
 <article class="p-4 rounded-lg border border-outline-variant/50 bg-surface-container-lowest/70 hover:bg-surface-container-lowest hover:border-outline transition-all duration-150 flex flex-col justify-between group active:scale-[0.99] wobbly-card">
   <div class="space-y-2">
     <div class="flex items-center justify-between">
-      <h3 class="font-body-md font-semibold text-on-surface group-hover:text-primary">{title}</h3>
+      <h3 class="font-body-md font-semibold text-on-surface group-hover:text-primary">
+        {href ? (
+          <a href={href} class="hover:underline underline-offset-4">
+            {title}
+          </a>
+        ) : (
+          title
+        )}
+      </h3>
       <span class="font-label-mono text-[10px] uppercase px-1.5 py-0.5 rounded bg-surface-container text-secondary tracking-wider">
         {language}
       </span>
