@@ -38,4 +38,4 @@ Track how long jobs wait, how long they run, and how often they fail. A queue wi
 
 ## What comes next
 
-The companion [Fieldnotes project](/projects/fieldnotes/) shows how a small Markdown-first tool can document these operating decisions. Replace this sample with your own article when you are ready to publish.
+The [Navigatus workflow automation project](/projects/navigatus-workflow-automation/) describes my work with background processing and recoverable workflows. Replace this sample with your own article when you are ready to publish.

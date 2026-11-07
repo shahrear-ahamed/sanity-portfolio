@@ -13,13 +13,26 @@ const routes = [
     heading: "Webhook for You and Me",
   },
   { path: "/projects/", active: "/projects/", heading: "Engineering" },
-  { path: "/projects/pulsedeck/", active: "/projects/", heading: "PulseDeck" },
+  {
+    path: "/projects/navigatus-workflow-automation/",
+    active: "/projects/",
+    heading: "Navigatus Workflow Automation",
+  },
   {
     path: "/blogs/building-a-small-reliable-queue/",
     active: "/blogs/",
     heading: "Building a Small, Reliable Queue",
   },
-  { path: "/projects/fieldnotes/", active: "/projects/", heading: "Fieldnotes" },
+  {
+    path: "/projects/mexemy-learning-platform/",
+    active: "/projects/",
+    heading: "Mexemy Learning Platform",
+  },
+  {
+    path: "/projects/navigatus-realtime-notifications/",
+    active: "/projects/",
+    heading: "Navigatus Real-Time Notifications",
+  },
 ];
 
 async function collectPages(directory: string): Promise<void> {
@@ -43,7 +56,7 @@ beforeAll(async () => {
 it("shows the Markdown examples on the homepage and in their archives", () => {
   for (const [archive, slug, title] of [
     ["blogs", "building-a-small-reliable-queue", "Building a Small, Reliable Queue"],
-    ["projects", "fieldnotes", "Fieldnotes"],
+    ["projects", "navigatus-workflow-automation", "Navigatus Workflow Automation"],
   ]) {
     for (const route of ["/", `/${archive}/`]) {
       const html = pages.get(route)!;
