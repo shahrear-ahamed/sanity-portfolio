@@ -2,7 +2,6 @@
 import { getCollection } from "astro:content";
 import FilterBar from "../../components/content/FilterBar.astro";
 import SketchDivider from "../../components/ui/SketchDivider.astro";
-import { posts as summaries } from "../../data/catalog";
 import SiteLayout from "../../layouts/SiteLayout.astro";
 
 const entries = await getCollection("blogs");
@@ -15,8 +14,8 @@ const dateLabel = (date: Date) =>
       timeZone: "UTC",
     })
     .toUpperCase();
-const posts = [
-  ...entries.map((entry) => {
+const posts = entries
+  .map((entry) => {
     return {
       slug: entry.id,
       title: entry.data.title,
@@ -29,15 +28,8 @@ const posts = [
         `~${(entry.body ?? "").trim().split(/\s+/).filter(Boolean).length} words`,
       href: `/blogs/${entry.id}/`,
     };
-  }),
-  ...summaries
-    .filter((post) => !entries.some((entry) => entry.id === post.slug))
-    .map((post) => ({
-      ...post,
-      isoDate: new Date(`${post.date} UTC`).toISOString().slice(0, 10),
-      href: undefined,
-    })),
-].sort((a, b) => b.isoDate.localeCompare(a.isoDate));
+  })
+  .sort((a, b) => b.isoDate.localeCompare(a.isoDate));
 const categories = [...new Set(posts.map((post) => post.category))];
 ---
 

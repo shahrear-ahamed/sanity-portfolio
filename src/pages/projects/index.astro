@@ -3,39 +3,23 @@ import { getCollection } from "astro:content";
 import FilterBar from "../../components/content/FilterBar.astro";
 import Newsletter from "../../components/home/Newsletter.astro";
 import SketchDivider from "../../components/ui/SketchDivider.astro";
-import { projects } from "../../data/catalog";
 import SiteLayout from "../../layouts/SiteLayout.astro";
 
-const entries = await getCollection("projects");
+const entries = (await getCollection("projects")).sort((a, b) => a.id.localeCompare(b.id));
 const featured = entries[0];
-const categoryFor = (category: string) => {
-  if (["DISTRIBUTED SYSTEMS", "NETWORKING", "DISTRIBUTED CONSENSUS"].includes(category)) {
-    return "Distributed Systems";
-  }
-  if (category === "OBSERVABILITY") return "AI & Agent Tooling";
-  if (category === "DEVELOPER CLI / APP") return "Developer CLI & Tools";
-  if (["OPEN SOURCE", "COMMUNITY INDEX", "LIBRARIES & PACKAGES"].includes(category)) {
-    return "Open Source & Libraries";
-  }
-  return category;
-};
-const summaries = projects.filter((project) => !entries.some((entry) => entry.id === project.slug));
-const catalog = [
-  ...entries.slice(1).map((entry) => ({
-    slug: entry.id,
-    title: entry.data.title,
-    category: entry.data.category,
-    stack: entry.data.stack.join(" / "),
-    excerpt: entry.data.description,
-    tags: entry.data.stack,
-    href: `/projects/${entry.id}/`,
-  })),
-  ...summaries.map((project) => ({ ...project, href: undefined })),
-];
+const catalog = entries.slice(1).map((entry) => ({
+  slug: entry.id,
+  title: entry.data.title,
+  category: entry.data.category,
+  stack: entry.data.stack.join(" / "),
+  excerpt: entry.data.description,
+  tags: entry.data.stack,
+  href: `/projects/${entry.id}/`,
+}));
 const categories = [
   ...new Set([
-    ...(featured ? [categoryFor(featured.data.category)] : []),
-    ...catalog.map((project) => categoryFor(project.category)),
+    ...(featured ? [featured.data.category] : []),
+    ...catalog.map((project) => project.category),
   ]),
 ];
 ---
@@ -64,7 +48,7 @@ const categories = [
       <article
         id={featured.id}
         data-filter-item
-        data-category={categoryFor(featured.data.category)}
+        data-category={featured.data.category}
         data-search={`${featured.data.title} ${featured.data.description} ${featured.data.category} ${featured.data.stack.join(" ")}`}
         class="featured-project wobbly-card bg-surface-container-lowest/70 p-space-lg sm:p-space-xl space-y-space-lg"
       >
@@ -147,7 +131,7 @@ const categories = [
           <article
             id={project.slug}
             data-filter-item
-            data-category={categoryFor(project.category)}
+            data-category={project.category}
             data-search={`${project.title} ${project.category} ${project.stack} ${project.excerpt} ${project.tags.join(" ")}`}
             class="wobbly-card bg-surface-container-lowest/70 hover:bg-surface-container-lowest p-5 flex flex-col gap-5"
           >
