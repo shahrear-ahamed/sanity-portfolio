@@ -2,6 +2,39 @@
 
 A fresh, local portfolio project built with Astro, Vite+, TypeScript 6, and Tailwind CSS 4.
 
+## Production checks
+
+Run `vp run validate` for formatting, lint, TypeScript, Astro diagnostics, a fresh
+production build, and output tests. Local pre-commit hooks run staged checks,
+Astro diagnostics, and build-and-test validation. Cloudflare builds the site on
+deployment; no separate GitHub CI workflow is configured.
+
+Dependabot proposes weekly dependency updates. Review compatibility
+before merging, especially the TypeScript/checker pair, Vite override, and
+`@emnapi/runtime` pin. Dependency updates are not automatically merged.
+
+`public/_headers` adds Cloudflare static-response security headers and long-lived
+caching only for fingerprinted `/_astro/` assets. HTML and unversioned images
+retain platform caching defaults. `src/pages/404.astro` supplies a recovery page.
+Verify actual HTTP headers and a missing URL after deploying; output tests alone
+cannot verify Cloudflare behavior.
+
+### Remaining launch work
+
+- Set the final production domain before adding canonical URLs, sitemap,
+  domain-specific robots rules, and complete social sharing metadata.
+- Add browser tests for theme persistence, keyboard navigation, and newsletter
+  behavior, plus accessibility and mobile performance checks.
+- Connect a newsletter provider before offering real subscriptions; replace
+  reference content and article placeholders with finished content.
+- Configure uptime alerts and review Cloudflare errors after deployment.
+- Test a Content Security Policy against the inline theme script and Google
+  font dependencies before enforcing it. Self-hosting fonts can simplify this.
+
+Coverage thresholds are not enabled: current tests validate generated HTML and
+assets, so a source coverage percentage would not measure interaction coverage.
+No backend, database, or authentication is needed for the current static scope.
+
 ## Getting started
 
 Use Node.js 22.23.4 or newer and the [Vite+ CLI](https://viteplus.dev/guide/).
