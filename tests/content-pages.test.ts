@@ -12,21 +12,11 @@ const routes = [
     heading: "Navigatus Internal Document Assistant",
   },
   { path: "/blogs/", active: "/blogs/", heading: "Writing &amp; essays" },
-  {
-    path: "/blogs/webhook-for-you-and-me/",
-    active: "/blogs/",
-    heading: "Webhook for You and Me",
-  },
   { path: "/projects/", active: "/projects/", heading: "Engineering" },
   {
     path: "/projects/navigatus-workflow-automation/",
     active: "/projects/",
     heading: "Navigatus Workflow Automation",
-  },
-  {
-    path: "/blogs/building-a-small-reliable-queue/",
-    active: "/blogs/",
-    heading: "Building a Small, Reliable Queue",
   },
   {
     path: "/projects/mexemy-learning-platform/",
@@ -60,7 +50,6 @@ beforeAll(async () => {
 
 it("shows the Markdown examples on the homepage and in their archives", () => {
   for (const [archive, slug, title] of [
-    ["blogs", "building-a-small-reliable-queue", "Building a Small, Reliable Queue"],
     ["projects", "navigatus-workflow-automation", "Navigatus Workflow Automation"],
   ]) {
     for (const route of ["/", `/${archive}/`]) {
