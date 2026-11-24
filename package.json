@@ -1,5 +1,5 @@
 {
-  "name": "asto-portfolio",
+  "name": "shahrear-portfolio",
   "version": "0.0.1",
   "type": "module",
   "scripts": {
@@ -8,16 +8,23 @@
     "preview": "astro preview",
     "check": "astro check",
     "format": "vp fmt",
-    "astro": "astro"
+    "astro": "astro",
+    "test": "astro build && vp test",
+    "validate": "vp check && astro check && astro build && vp test",
+    "prepare": "vp config --no-agent"
   },
   "dependencies": {
+    "@astrojs/rss": "^4.0.19",
+    "@hugeicons/core-free-icons": "^4.4.0",
     "@tailwindcss/vite": "4.3.5",
     "astro": "^7.4.7",
     "tailwindcss": "4.3.5"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.12",
+    "@astrojs/compiler-rs": "^0.5.2",
     "@emnapi/runtime": "1.11.3",
+    "@types/node": "^26.6.6",
     "typescript": "^6.0.3",
     "vite-plus": "catalog:"
   },

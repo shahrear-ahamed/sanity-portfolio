@@ -1,0 +1,210 @@
+---
+import {
+  File02Icon,
+  GitBranchIcon,
+  Github01Icon,
+  Linkedin01Icon,
+  Mail01Icon,
+} from "@hugeicons/core-free-icons";
+import { profile } from "../../data/profile";
+import Icon from "../ui/Icon.astro";
+const links = [
+  { label: "GitHub", href: profile.github, icon: Github01Icon, external: true },
+  { label: "LinkedIn", href: profile.linkedin, icon: Linkedin01Icon, external: true },
+  { label: "Blogs", href: "#blogs", icon: File02Icon, external: false },
+  { label: "Projects", href: "#works", icon: GitBranchIcon, external: false },
+  { label: "Email", href: `mailto:${profile.email}`, icon: Mail01Icon, external: false },
+];
+---
+
+<section class="hero bg-surface-container-lowest/70" id="home" aria-labelledby="hero-heading">
+  <div class="hero-portrait">
+    <img
+      src="/images/shahrear-ahamed.webp"
+      alt="Shahrear Ahamed"
+      width="96"
+      height="96"
+      fetchpriority="high"
+    />
+  </div>
+
+  <p class="hero-name">Shahrear Ahamed</p>
+  <h1 id="hero-heading">
+    <span class="hero-line">
+      I turn <s>busywork</s>
+    </span>
+    <span class="hero-line">
+      into <em>reliable</em> systems.
+    </span>
+  </h1>
+
+  <p class="hero-description" id="about">
+    Software Engineer building thoughtful backend systems and full-stack products. I enjoy turning
+    messy workflows into clean, dependable software that teams can rely on.
+  </p>
+
+  <nav class="hero-links" aria-label="Connect and explore">
+    {links.map(({ label, href, icon, external }) => (
+      <a
+        href={href}
+        aria-label={label}
+        title={label}
+        rel={external ? "noreferrer" : undefined}
+        target={external ? "_blank" : undefined}
+      >
+        <Icon icon={icon} size={20} />
+      </a>
+    ))}
+  </nav>
+</section>
+
+<style>
+  .hero {
+    --hero-frame-radius: 7% 3% 6% 4% / 4% 7% 3% 6%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 3.25rem 2.25rem 3rem;
+    color: var(--color-on-surface);
+    border: 1px solid var(--color-outline);
+    border-radius: 49% 1.8% 42% 1.8% / 3% 45% 3% 48%;
+    text-align: center;
+  }
+
+  .hero-portrait {
+    position: relative;
+    padding: 4px;
+    border: 1px solid var(--color-outline);
+    border-radius: var(--hero-frame-radius);
+    transform: rotate(-2deg);
+  }
+
+  .hero-portrait::after {
+    content: "";
+    position: absolute;
+    inset: 2px -3px -3px 2px;
+    border: 1px solid color-mix(in srgb, var(--color-outline) 45%, transparent);
+    border-radius: inherit;
+    pointer-events: none;
+  }
+
+  .hero-portrait img {
+    display: block;
+    width: 96px;
+    height: 96px;
+    object-fit: cover;
+    border-radius: var(--hero-frame-radius);
+    filter: grayscale(1);
+    transition: filter 0.3s ease;
+  }
+
+  .hero-portrait:hover img {
+    filter: grayscale(0);
+  }
+
+  .hero .hero-name {
+    margin: 1.25rem 0 0.25rem;
+    font-family: "Instrument Serif", Georgia, serif !important;
+    font-size: 1.25rem;
+    font-style: italic;
+    line-height: 1.3 !important;
+    color: var(--color-secondary);
+  }
+
+  .hero h1 {
+    margin: 0;
+    font-size: clamp(2.5rem, 6.2vw, 3.5rem);
+    line-height: 1.12;
+    letter-spacing: -0.035em !important;
+  }
+
+  .hero-line {
+    display: block;
+  }
+  .hero h1 em {
+    font-weight: 400;
+    text-decoration: underline;
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 0.14em;
+  }
+  .hero h1 s {
+    color: var(--color-outline);
+    font-style: italic;
+    text-decoration-thickness: 1px;
+  }
+
+  .hero .hero-description {
+    max-width: 35rem;
+    margin: 1.5rem 0 0;
+    font-family: "Instrument Serif", Georgia, serif !important;
+    font-size: 1.125rem;
+    line-height: 1.65 !important;
+    color: var(--color-on-surface-variant);
+    text-wrap: pretty;
+  }
+
+  .hero-links {
+    display: flex;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-top: 1.25rem;
+  }
+
+  .hero-links a {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 38px;
+    height: 38px;
+    border: 1px solid var(--color-outline);
+    border-radius: var(--hero-frame-radius);
+    transform: rotate(-3deg);
+    transition:
+      transform 0.2s ease,
+      background-color 0.2s ease;
+  }
+
+  .hero-links a::after {
+    content: "";
+    position: absolute;
+    inset: 2px -3px -3px 2px;
+    border: 1px solid color-mix(in srgb, var(--color-outline) 25%, transparent);
+    border-radius: inherit;
+    pointer-events: none;
+  }
+
+  .hero-links a:nth-child(even) {
+    transform: rotate(2deg);
+  }
+  .hero-links a:hover,
+  .hero-links a:focus-visible {
+    background: var(--color-surface-container);
+    transform: translateY(-2px) rotate(0);
+  }
+
+  @media (max-width: 639px) {
+    #home.hero {
+      padding: 2.5rem 1.25rem;
+    }
+    .hero-portrait img {
+      width: 72px;
+      height: 72px;
+    }
+    .hero .hero-name {
+      margin-top: 1rem;
+      font-size: 1.0625rem;
+    }
+    .hero .hero-description {
+      font-size: 1rem;
+      margin-top: 1.25rem;
+    }
+    .hero-links {
+      margin-top: 1rem;
+    }
+    .hero-links a {
+      width: 36px;
+      height: 36px;
+    }
+  }
+</style>

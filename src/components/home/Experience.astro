@@ -1,0 +1,74 @@
+---
+import { skills } from "../../data/profile";
+---
+
+<section class="space-y-space-lg pt-space-xs" id="experience" aria-labelledby="experience-heading">
+  <div class="space-y-3">
+    <h2 id="experience-heading" class="font-headline-md text-headline-md text-on-surface">
+      Work experience
+    </h2>
+  </div>
+
+  <div class="space-y-space-md">
+    <article class="content-panel space-y-3">
+      <h3 class="font-headline-sm text-headline-sm">Software Engineer</h3>
+      <div class="metadata-row justify-between">
+        <span>Navigatus · Remote · Melbourne, Australia</span>
+        <span>Mar 2025 – Present</span>
+      </div>
+      <ul class="list-disc pl-5 space-y-1.5 font-body-sm text-body-sm text-on-surface-variant">
+        <li>
+          Built Redis and BullMQ background workflows with retry, recovery, and idempotency
+          patterns, cutting weekly manual processing from 65+ hours to ~2 hours across ~200 staff
+          and ~300 participants.
+        </li>
+        <li>
+          Integrated Xero APIs into finance and payroll workflows to synchronize operational and
+          accounting data.
+        </li>
+        <li>
+          Delivered real-time notifications (SSE, Redis Pub/Sub, durable inbox, recipient
+          authorization) and an internal RAG assistant for operational documents.
+        </li>
+      </ul>
+    </article>
+
+    <article class="content-panel space-y-3">
+      <h3 class="font-headline-sm text-headline-sm">Founding Full-Stack Engineer</h3>
+      <div class="metadata-row justify-between">
+        <span>Mexemy · Cumilla, Bangladesh</span>
+        <span>Nov 2022 – Dec 2024</span>
+      </div>
+      <ul class="list-disc pl-5 space-y-1.5 font-body-sm text-body-sm text-on-surface-variant">
+        <li>
+          Developed and maintained the production learning platform and internal tools serving 3k–5k
+          students.
+        </li>
+        <li>
+          Automated learner onboarding and private student community access through Discord
+          integrations.
+        </li>
+        <li>
+          Built and led the engineering team and day-to-day technical operations as the business
+          grew to BDT 9M in annual revenue in 2024.
+        </li>
+      </ul>
+    </article>
+  </div>
+
+  <section class="space-y-space-md" aria-labelledby="skills-heading">
+    <h3 id="skills-heading" class="font-headline-sm text-headline-sm">
+      Technical skills
+    </h3>
+    <dl class="grid gap-space-md sm:grid-cols-2">
+      {skills.map(({ label, items }) => (
+        <div class="space-y-2">
+          <dt class="font-label-mono text-label-mono uppercase tracking-wider text-secondary">
+            {label}
+          </dt>
+          <dd class="font-body-sm text-body-sm text-on-surface-variant">{items.join(" · ")}</dd>
+        </div>
+      ))}
+    </dl>
+  </section>
+</section>
