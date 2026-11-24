@@ -1,12 +1,19 @@
 ---
-import { Github01Icon, File02Icon, GitBranchIcon, Mail01Icon } from "@hugeicons/core-free-icons";
+import {
+  File02Icon,
+  GitBranchIcon,
+  Github01Icon,
+  Linkedin01Icon,
+  Mail01Icon,
+} from "@hugeicons/core-free-icons";
 import { profile } from "../../data/profile";
 import Icon from "../ui/Icon.astro";
 const links = [
-  { label: "GitHub", href: profile.github, icon: Github01Icon },
-  { label: "Blogs", href: "#blogs", icon: File02Icon },
-  { label: "Projects", href: "#works", icon: GitBranchIcon },
-  { label: "Email", href: `mailto:${profile.email}`, icon: Mail01Icon },
+  { label: "GitHub", href: profile.github, icon: Github01Icon, external: true },
+  { label: "LinkedIn", href: profile.linkedin, icon: Linkedin01Icon, external: true },
+  { label: "Blogs", href: "#blogs", icon: File02Icon, external: false },
+  { label: "Projects", href: "#works", icon: GitBranchIcon, external: false },
+  { label: "Email", href: `mailto:${profile.email}`, icon: Mail01Icon, external: false },
 ];
 ---
 
@@ -37,8 +44,14 @@ const links = [
   </p>
 
   <nav class="hero-links" aria-label="Connect and explore">
-    {links.map(({ label, href, icon }) => (
-      <a href={href} aria-label={label} title={label}>
+    {links.map(({ label, href, icon, external }) => (
+      <a
+        href={href}
+        aria-label={label}
+        title={label}
+        rel={external ? "noreferrer" : undefined}
+        target={external ? "_blank" : undefined}
+      >
         <Icon icon={icon} size={20} />
       </a>
     ))}
