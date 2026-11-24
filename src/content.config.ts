@@ -22,8 +22,11 @@ const projects = defineCollection({
     title: z.string(),
     description: z.string(),
     category: z.string().default("Project"),
+    kind: z.enum(["Project", "Open Source"]).default("Project"),
     timeline: z.string().optional(),
     role: z.string().optional(),
+    repo: z.url().optional(),
+    liveUrl: z.url().optional(),
     stack: z.array(z.string()).default([]),
     metrics: z
       .array(

@@ -1,41 +1,41 @@
 ---
 title: Building a Small, Reliable Queue
-description: A demo article about retries, idempotency, and making background jobs easier to operate.
+description: Practical patterns for retries, idempotency, and observability in background job queues.
 date: 2026-11-07
 category: Distributed Systems
 subtitle: Start with a simple worker, then make failure predictable.
 ---
 
-This is a dummy blog post for previewing the Markdown publishing workflow. The system described here is an illustrative example.
+Background queues let an HTTP request finish quickly while slow, multi-step work runs asynchronously. The hard part isn't enqueueing the first job—it's making sure the hundredth failure is safe to retry and easy to diagnose.
 
 ## Start with one job
 
-A background queue lets a request finish before slow work begins. Imagine an application that generates a weekly report: the request stores a job, and a worker creates the report later.
+A background queue separates accepting work from executing it. When an application generates a weekly report or syncs an invoice, the request stores a job payload and a worker processes it out of band.
 
-The smallest useful job contains an identifier and the information needed to find its input.
+The smallest useful job contains a stable identifier and the minimum context needed to fetch fresh state from the database.
 
 ```json
 {
   "id": "report-123",
   "type": "generate-report",
-  "accountId": "demo-account"
+  "accountId": "acct-482"
 }
 ```
 
 ## Plan for a second attempt
 
-A worker can stop after saving a report but before acknowledging its job. The queue may deliver that job again. Use the job identifier as an idempotency key so another attempt can find the existing result.
+A worker can crash after writing a report to storage but before acknowledging the job. When that happens, the queue delivers the job a second time. Using the job identifier as an idempotency key lets the retry detect the completed work instead of duplicating side effects.
 
-- Record the job before accepting it.
-- Retry temporary failures with a delay and a limit.
-- Keep exhausted jobs available for inspection.
+- Persist the job state before starting external side effects.
+- Retry transient failures with exponential backoff and a bounded attempt count.
+- Move exhausted jobs to a dead-letter state for inspection rather than dropping them.
 
-> A retry should repeat the work safely and leave enough information to explain what happened.
+> A retry should repeat the work safely and leave enough context to explain what happened.
 
 ## Make the queue observable
 
-Track how long jobs wait, how long they run, and how often they fail. A queue with no errors can still be unhealthy if its oldest job has been waiting for an hour.
+Track queue depth, wait time, execution duration, and failure rate. A queue with zero errors can still be unhealthy if its oldest waiting job has been stuck for an hour.
 
-## What comes next
+## Applying this in production
 
-The [Navigatus workflow automation project](/projects/navigatus-workflow-automation/) describes my work with background processing and recoverable workflows. Replace this sample with your own article when you are ready to publish.
+The [Navigatus workflow automation project](/projects/navigatus-workflow-automation/) covers how I applied these retry, state-tracking, and idempotency patterns with Redis and BullMQ in production.
