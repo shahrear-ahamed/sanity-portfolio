@@ -24,7 +24,7 @@ const projects = (await getCollection("projects"))
         title={project.data.title}
         language={project.data.stack[0] ?? "PROJECT"}
         icon={CodeIcon}
-        detail={project.data.category}
+        detail={`${project.data.kind} · ${project.data.category}`}
       >
         {project.data.description}
       </ProjectCard>

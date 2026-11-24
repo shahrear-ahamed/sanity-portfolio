@@ -1,6 +1,5 @@
 ---
 import { getCollection, render, type CollectionEntry } from "astro:content";
-// import Newsletter from "../../components/ui/Newsletter.astro";
 import SketchDivider from "../../components/ui/SketchDivider.astro";
 import SiteLayout from "../../layouts/SiteLayout.astro";
 
@@ -16,7 +15,8 @@ interface Props {
   project: CollectionEntry<"projects">;
 }
 const { project } = Astro.props;
-const { title, description, category, timeline, role, stack, metrics } = project.data;
+const { title, description, category, kind, timeline, role, repo, liveUrl, stack, metrics } =
+  project.data;
 const { Content } = await render(project);
 ---
 
@@ -25,9 +25,25 @@ const { Content } = await render(project);
     <a class="back-link" href="/projects/">
       ← All projects
     </a>
-    <p class="eyebrow">{category} · Case study</p>
+    <p class="eyebrow">
+      {kind} · {category}
+    </p>
     <h1>{title}</h1>
     <p class="page-lead">{description}</p>
+    {(repo || liveUrl) && (
+      <div class="metadata-row">
+        {liveUrl && (
+          <a class="back-link" href={liveUrl} rel="noreferrer" target="_blank">
+            Live site ↗
+          </a>
+        )}
+        {repo && (
+          <a class="back-link" href={repo} rel="noreferrer" target="_blank">
+            Source repository ↗
+          </a>
+        )}
+      </div>
+    )}
     {(timeline || role || stack.length > 0) && (
       <dl class="project-meta content-panel">
         {timeline && (
@@ -72,8 +88,6 @@ const { Content } = await render(project);
   <article class="content-panel editorial-prose case-study">
     <Content />
   </article>
-
-  {/* <Newsletter /> */}
 
   <nav aria-label="Project navigation" class="project-navigation">
     <a class="back-link" href="/projects/">
