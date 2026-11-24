@@ -9,14 +9,14 @@ stack:
   - Workflow automation
 metrics:
   - label: Students served
-    value: ~3,000–5,000
+    value: 3k–5k
     detail: Education business supported by the platform
   - label: Annual revenue
     value: BDT 9M
     detail: Business revenue in 2024
 ---
 
-As Founding Full-Stack Engineer at Mexemy, I developed and maintained the production web platform and internal automation used by an education business serving approximately 3,000–5,000 students.
+As Founding Full-Stack Engineer at Mexemy, I developed and maintained the production web platform and internal automation used by an education business serving 3k–5k students.
 
 ## Building the platform
 
