@@ -3,6 +3,7 @@ import { Github01Icon } from "@hugeicons/core-free-icons";
 import Icon from "../ui/Icon.astro";
 import { profile } from "../../data/profile";
 import ThemeToggle from "../ui/ThemeToggle.astro";
+
 const pathname = Astro.url.pathname;
 const navigation = [
   { label: "/home", href: "/#home", active: pathname === "/" },
@@ -12,68 +13,320 @@ const navigation = [
 ];
 ---
 
-<header class="docked full-width top-0 sticky z-50 bg-surface/90 backdrop-blur-md border-outline-variant/30">
-  <div class="flex flex-wrap gap-y-4 justify-between items-center max-w-185 mx-auto px-margin-desktop py-space-sm w-full">
+<header class="docked full-width top-0 sticky z-50 w-full bg-surface/90 backdrop-blur-md">
+  <div class="site-header-inner w-full mx-auto px-5 sm:px-6 md:px-8 lg:px-10 xl:px-14 py-2.5 md:py-3">
     <a
-      class="font-headline-sm text-headline-sm text-on-surface tracking-tight font-medium active:scale-[0.98] transition-transform duration-100"
+      class="site-header-brand font-headline-sm text-headline-sm text-on-surface tracking-tight font-medium active:scale-[0.98] transition-transform duration-100"
       href="/#home"
     >
       Shahrear Ahamed
     </a>
 
-    <nav
-      aria-label="Main navigation"
-      class="flex flex-wrap justify-center items-center gap-3 order-3 w-full md:order-0 md:w-auto"
+    <button
+      class="menu-toggle"
+      type="button"
+      aria-label="Open navigation menu"
+      aria-expanded="false"
+      aria-controls="site-navigation-panel"
     >
-      {navigation.map(({ label, href, active }) => (
-        <a
-          class:list={[
-            "text-nav-link font-nav-link pb-0.5 transition-colors duration-150",
-            active
-              ? "text-primary border-b border-primary"
-              : "text-on-surface-variant hover:text-on-surface",
-          ]}
-          href={href}
-          aria-current={active ? "page" : undefined}
-        >
-          {label}
-        </a>
-      ))}
-    </nav>
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
 
-    <div class="flex items-center space-x-2.5">
-      <ThemeToggle />
-      <span
-        class="cursor-pointer px-2.5 py-1 rounded-full border border-outline-variant/60 text-nav-link font-nav-link text-on-surface hover:border-outline hover:text-primary transition-colors duration-150 active:scale-[0.98]"
-        title="Coming soon"
-      >
-        RSS
-      </span>
-      <a
-        aria-label="GitHub"
-        class="w-8 h-8 shrink-0 flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors duration-150 active:scale-[0.98]"
-        href={profile.github}
-        rel="noreferrer"
-        target="_blank"
-      >
-        <Icon icon={Github01Icon} />
-      </a>
+    <div id="site-navigation-panel" class="site-header-panel">
+      <nav aria-label="Main navigation" id="site-navigation" class="site-header-nav">
+        {navigation.map(({ label, href, active }) => (
+          <a
+            class:list={[
+              "site-header-link text-nav-link font-nav-link transition-colors duration-150",
+              active ? "is-active text-primary" : "text-on-surface-variant hover:text-on-surface",
+            ]}
+            href={href}
+            aria-current={active ? "page" : undefined}
+          >
+            {label}
+          </a>
+        ))}
+      </nav>
+
+      <div class="site-header-tools">
+        <ThemeToggle />
+        <button
+          type="button"
+          class="site-tool-pill cursor-pointer px-3 py-1.5 rounded-full border border-outline-variant/60 text-nav-link font-nav-link text-on-surface hover:border-outline hover:text-primary transition-colors duration-150 active:scale-[0.98]"
+          title="Coming soon"
+        >
+          RSS
+        </button>
+        <a
+          aria-label="GitHub"
+          class="site-tool-github w-9 h-9 shrink-0 rounded-full flex items-center justify-center text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors duration-150 active:scale-[0.98]"
+          href={profile.github}
+          rel="noreferrer"
+          target="_blank"
+        >
+          <Icon icon={Github01Icon} />
+        </a>
+      </div>
     </div>
   </div>
+
+  <div class="w-full hand-wavy-stroke overflow-hidden pointer-events-none">
+    <svg
+      class="w-full h-2 stroke-current block"
+      fill="none"
+      preserveAspectRatio="none"
+      viewBox="0 0 1200 6"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M0 3 Q 75 1.5, 150 3.2 T 300 2.8 T 450 3.3 T 600 2.7 T 750 3.4 T 900 2.6 T 1050 3.2 T 1200 2.9"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="1.2"
+      ></path>
+    </svg>
+  </div>
 </header>
-<div class="w-full sticky top-14.25 z-40 hand-wavy-stroke overflow-hidden pointer-events-none">
-  <svg
-    class="w-full h-2 stroke-current"
-    fill="none"
-    preserveAspectRatio="none"
-    viewBox="0 0 1200 6"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path
-      d="M0 3 Q 75 1.5, 150 3.2 T 300 2.8 T 450 3.3 T 600 2.7 T 750 3.4 T 900 2.6 T 1050 3.2 T 1200 2.9"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-      stroke-width="1.2"
-    ></path>
-  </svg>
-</div>
+
+<style>
+  .site-header-inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .site-header-brand {
+    white-space: nowrap;
+    font-size: clamp(1.05rem, 1.4vw, 1.3rem);
+    justify-self: start;
+  }
+
+  .menu-toggle {
+    display: flex;
+    width: 2.75rem;
+    height: 2.75rem;
+    padding: 0.7rem;
+    border: 1px solid var(--color-outline-variant);
+    border-radius: 9999px;
+    background: transparent;
+    color: var(--color-on-surface);
+    cursor: pointer;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.25rem;
+    justify-self: end;
+    transition:
+      border-color 150ms ease,
+      background-color 150ms ease;
+  }
+
+  .menu-toggle:hover {
+    border-color: var(--color-outline);
+    background-color: var(--color-surface-container);
+  }
+
+  .menu-toggle span {
+    display: block;
+    width: 100%;
+    height: 1.5px;
+    background: currentColor;
+    transition:
+      transform 150ms ease,
+      opacity 150ms ease;
+  }
+
+  .menu-toggle[aria-expanded="true"] span:first-child {
+    transform: translateY(5.5px) rotate(45deg);
+  }
+
+  .menu-toggle[aria-expanded="true"] span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .menu-toggle[aria-expanded="true"] span:last-child {
+    transform: translateY(-5.5px) rotate(-45deg);
+  }
+
+  /* Mobile (< 768px): everything lives inside the collapsible hamburger list */
+  .site-header-panel {
+    display: none;
+    grid-column: 1 / -1;
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+    padding: 0.75rem 0 0.5rem;
+    border-top: 1px solid color-mix(in srgb, var(--color-outline-variant) 55%, transparent);
+  }
+
+  .site-header-panel.is-open {
+    display: flex;
+  }
+
+  .site-header-nav {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    gap: 0.25rem;
+  }
+
+  .site-header-link {
+    width: 100%;
+    min-height: 2.75rem;
+    padding: 0.625rem 0.75rem;
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+  }
+
+  .site-header-link:hover {
+    background-color: var(--color-surface-container-low);
+  }
+
+  .site-header-link.is-active {
+    background-color: var(--color-surface-container);
+    font-weight: 500;
+  }
+
+  .site-header-tools {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    gap: 0.75rem;
+    padding: 0.75rem 0.75rem 0.25rem;
+    border-top: 1px solid color-mix(in srgb, var(--color-outline-variant) 45%, transparent);
+  }
+
+  /* Tablet (768px - 1023px): full-width single row, compact inline buttons */
+  @media (min-width: 768px) {
+    .site-header-inner {
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      column-gap: 1.5rem;
+    }
+
+    .menu-toggle {
+      display: none;
+    }
+
+    .site-header-panel {
+      display: contents;
+      border-top: 0;
+      padding: 0;
+    }
+
+    .site-header-nav {
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      width: auto;
+      gap: 0.5rem;
+    }
+
+    .site-header-link {
+      width: auto;
+      min-height: 2.5rem;
+      padding: 0.5rem 0.625rem;
+      border-radius: 0;
+      display: inline-flex;
+      justify-content: center;
+    }
+
+    .site-header-link:hover {
+      background-color: transparent;
+    }
+
+    .site-header-link.is-active {
+      background-color: transparent;
+      border-bottom: 1.5px solid var(--color-primary);
+    }
+
+    .site-header-tools {
+      width: auto;
+      justify-content: flex-end;
+      gap: 0.5rem;
+      padding: 0;
+      border-top: 0;
+    }
+  }
+
+  /* Laptop (1024px - 1279px) */
+  @media (min-width: 1024px) {
+    .site-header-inner {
+      column-gap: 2.5rem;
+    }
+
+    .site-header-nav {
+      gap: 1.25rem;
+    }
+
+    .site-header-link {
+      padding: 0.5rem 0.75rem;
+    }
+
+    .site-header-tools {
+      gap: 0.75rem;
+    }
+  }
+
+  /* Desktop (>= 1280px) */
+  @media (min-width: 1280px) {
+    .site-header-inner {
+      column-gap: 3.5rem;
+    }
+
+    .site-header-nav {
+      gap: 2rem;
+    }
+
+    .site-header-tools {
+      gap: 1rem;
+    }
+  }
+</style>
+
+<script>
+  const menuButton = document.querySelector<HTMLButtonElement>(".menu-toggle");
+  const navigationPanel = document.querySelector<HTMLElement>("#site-navigation-panel");
+
+  if (menuButton && navigationPanel) {
+    const setMenuOpen = (open: boolean) => {
+      menuButton.setAttribute("aria-expanded", String(open));
+      menuButton.setAttribute(
+        "aria-label",
+        open ? "Close navigation menu" : "Open navigation menu",
+      );
+      navigationPanel.classList.toggle("is-open", open);
+    };
+
+    menuButton.addEventListener("click", () => {
+      const isOpen = menuButton.getAttribute("aria-expanded") === "true";
+      setMenuOpen(!isOpen);
+    });
+
+    navigationPanel.addEventListener("click", (event) => {
+      if ((event.target as HTMLElement).closest("a")) {
+        setMenuOpen(false);
+      }
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && menuButton.getAttribute("aria-expanded") === "true") {
+        setMenuOpen(false);
+        menuButton.focus();
+      }
+    });
+
+    const tabletMedia = window.matchMedia("(min-width: 768px)");
+    tabletMedia.addEventListener("change", (event) => {
+      if (event.matches) {
+        setMenuOpen(false);
+      }
+    });
+  }
+</script>
