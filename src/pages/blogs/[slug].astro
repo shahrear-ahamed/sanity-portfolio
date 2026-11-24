@@ -21,7 +21,7 @@ const formatDate = (value: Date) =>
 ---
 
 <SiteLayout title={`${title} — Shahrear Ahamed`} description={description}>
-  <header class="page-intro">
+  <header class="page-intro mb-space-md!">
     <a class="back-link" href="/blogs/">
       ← All posts
     </a>
@@ -41,11 +41,11 @@ const formatDate = (value: Date) =>
       <span class="tag">{category}</span>
     </div>
   </header>
-  <SketchDivider />
-  <article class="content-panel editorial-prose" aria-label={title}>
+  <SketchDivider class="my-0! mb-space-lg!" />
+  <article class="content-panel editorial-prose mb-space-md!" aria-label={title}>
     <Content />
   </article>
-  <SketchDivider />
+  <SketchDivider class="my-0! mb-space-lg!" />
   <a class="back-link" href="/blogs/">
     ← Back to all writing
   </a>

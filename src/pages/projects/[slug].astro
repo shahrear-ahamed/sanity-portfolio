@@ -21,7 +21,7 @@ const { Content } = await render(project);
 ---
 
 <SiteLayout title={`${title} — Project · Shahrear Ahamed`} description={description}>
-  <header class="page-intro">
+  <header class="page-intro mb-space-lg!">
     <a class="back-link" href="/projects/">
       ← All projects
     </a>
@@ -73,7 +73,7 @@ const { Content } = await render(project);
   </header>
 
   {metrics.length > 0 && (
-    <section aria-label="Project results" class="metric-grid">
+    <section aria-label="Project results" class="metric-grid mb-space-md!">
       {metrics.map(({ label, value, detail }) => (
         <div class="metric content-panel">
           <span class="eyebrow">{label}</span>
@@ -84,8 +84,8 @@ const { Content } = await render(project);
     </section>
   )}
 
-  <SketchDivider />
-  <article class="content-panel editorial-prose case-study">
+  <SketchDivider class="my-0! mb-space-lg!" />
+  <article class="content-panel editorial-prose case-study mb-space-lg!">
     <Content />
   </article>
 
@@ -104,7 +104,7 @@ const { Content } = await render(project);
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 1.25rem;
-    margin-top: 2rem;
+    margin-top: 0.5rem;
   }
   .project-meta dt {
     margin-bottom: 0.5rem;
@@ -125,7 +125,7 @@ const { Content } = await render(project);
   }
   .metric-grid {
     display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
     gap: 0.75rem;
   }
   .metric {
