@@ -78,12 +78,14 @@ const { categories, placeholder } = Astro.props;
 <style>
   catalog-filter {
     display: block;
-    margin-bottom: 2.5rem;
+    margin-bottom: 1.5rem;
   }
   .search-field {
     display: flex;
     align-items: center;
     gap: 0.75rem;
+    width: 100%;
+    max-width: 38rem;
     padding: 0.75rem 1rem;
     border: 1px solid var(--color-outline);
     border-radius: 90px 8px 80px 7px / 7px 80px 8px 90px;
@@ -112,7 +114,7 @@ const { categories, placeholder } = Astro.props;
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
-    margin-top: 1rem;
+    margin-top: 0.75rem;
   }
   button {
     font-family: var(--font-label-mono);
@@ -132,7 +134,8 @@ const { categories, placeholder } = Astro.props;
     border-color: var(--color-primary);
   }
   .filter-status {
-    margin-top: 1rem;
+    margin-top: 0.75rem;
+    margin-bottom: 0;
     font-family: var(--font-label-mono) !important;
     font-size: 0.65rem;
     color: var(--color-secondary);
